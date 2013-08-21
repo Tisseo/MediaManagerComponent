@@ -318,6 +318,5 @@ class UniversalClassLoader
             $file = stream_resolve_include_path($nc)) {
             return $file;
         }
-            
     }
 }

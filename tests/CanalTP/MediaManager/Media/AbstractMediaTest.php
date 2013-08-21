@@ -24,18 +24,19 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType(
             'integer', $this->stub->getMediaType(),
             Registry::get('NOT_CORRECT')
-            );
+        );
         $this->assertEquals(
             $this->stub->getMediaType(), MediaType::UNKNOWN,
             Registry::get('NOT_CORRECT')
-            );
+        );
         $this->assertInternalType(
             'integer', $this->stub->getSize(),
             Registry::get('NOT_INIT')
-            );
-        $this->assertEquals($this->stub->getSize(), 0,
+        );
+        $this->assertEquals(
+            $this->stub->getSize(), 0,
             Registry::get('NOT_INIT')
-            );
+        );
     }
 
     public function testSetAndGetType()
@@ -46,12 +47,12 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $type, SoundType::UNKNOWN,
             Registry::get('NOT_INIT')
-            );
+        );
         $this->stub->setType(SoundType::UNKNOWN);
         $this->assertEquals(
             $this->stub->getType(), SoundType::UNKNOWN,
             Registry::get('NOT_SET')
-            );
+        );
     }
 
     public function testSetAndGetMediaType()
@@ -62,12 +63,12 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $mediaType, MediaType::UNKNOWN,
             Registry::get('NOT_INIT')
-            );
+        );
         $this->stub->setMediaType(MediaType::SOUND);
         $this->assertEquals(
             $this->stub->getMediaType(), MediaType::SOUND,
             Registry::get('NOT_SET')
-            );
+        );
     }
 
     public function testSetAndGetSize()
@@ -80,7 +81,7 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $this->stub->getSize(), 42.42,
             Registry::get('NOT_SET')
-            );
+        );
     }
 
     public function testSetAndGetExpirationDate()
@@ -94,7 +95,7 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $this->stub->getExpirationDate(), $date,
             Registry::get('NOT_SET')
-            );
+        );
     }
 
     public function testSetAndGetPath()
@@ -105,7 +106,7 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $this->stub->getPath(), "/my/path/",
             Registry::get('NOT_SET')
-            );
+        );
     }
 
     public function testSetAndGetCompany()
@@ -115,12 +116,12 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertNull(
             $this->stub->getCompany(),
             Registry::get('NOT_INIT')
-            );
+        );
         $this->stub->setCompany($company);
         $this->assertEquals(
             $this->stub->getCompany(),
             $company, Registry::get('NOT_SET')
-            );
+        );
     }
 
     public function testSetAndGetCategory()
@@ -130,11 +131,11 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertNull(
             $this->stub->getCategory(),
             Registry::get('NOT_INIT')
-            );
+        );
         $this->stub->setCategory($category);
         $this->assertEquals(
             $this->stub->getCategory(), $category,
             Registry::get('NOT_SET')
-            );
+        );
     }
 }
