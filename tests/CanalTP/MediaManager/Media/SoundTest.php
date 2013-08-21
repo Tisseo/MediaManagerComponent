@@ -1,9 +1,12 @@
 <?php
 
-require_once 'Object/MediaManager/Media/AbstractMedia.php';
-require_once 'Object/MediaManager/Media/Sound.php';
+namespace CanalTP\MediaManager\Test\Media;
 
-class SoundTest extends PHPUnit_Framework_TestCase
+use CanalTP\MediaManager\Media\MediaType;
+use CanalTP\MediaManager\Media\SoundType;
+use CanalTP\MediaManager\Media\Sound;
+
+class SoundTest extends \PHPUnit_Framework_TestCase
 {
     private $sound = null;
 

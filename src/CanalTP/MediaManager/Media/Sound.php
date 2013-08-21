@@ -2,8 +2,8 @@
 
 namespace CanalTP\MediaManager\Media;
 
-require_once 'SoundType.php';
-require_once 'AbstractMedia.php';
+use CanalTP\MediaManager\Media\SoundType;
+use CanalTP\MediaManager\Media\AbstractMedia;
 
 class Sound extends AbstractMedia
 {

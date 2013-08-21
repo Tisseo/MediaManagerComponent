@@ -4,7 +4,7 @@ namespace CanalTP\MediaManager\Test\Category;
 
 use CanalTP\MediaManager\Category\Line;
 
-class LineTest extends PHPUnit_Framework_TestCase
+class LineTest extends \PHPUnit_Framework_TestCase
 {
     private $line = null;
 

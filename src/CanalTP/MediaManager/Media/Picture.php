@@ -2,8 +2,8 @@
 
 namespace CanalTP\MediaManager\Media;
 
-require_once 'PictureType.php';
-require_once 'AbstractMedia.php';
+use CanalTP\MediaManager\Media\PictureType;
+use CanalTP\MediaManager\Media\AbstractMedia;
 
 class Picture extends AbstractMedia
 {

@@ -2,6 +2,8 @@
 
 namespace CanalTP\MediaManager\Media;
 
+use CanalTP\MediaManager\Category\CategoryInterface;
+
 interface MediaInterface
 {
     public function getMediaType();

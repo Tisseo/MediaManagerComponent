@@ -2,7 +2,7 @@
 
 namespace CanalTP\MediaManager\Category;
 
-require_once 'CategoryInterface.php';
+use CanalTP\MediaManager\Category\CategoryInterface;
 
 abstract class AbstractCategory implements CategoryInterface
 {
@@ -30,7 +30,7 @@ abstract class AbstractCategory implements CategoryInterface
         return ($this->medias);
     }
 
-    public function addMedia(IMedia $media)
+    public function addMedia(MediaInterface $media)
     {
         array_push($this->medias, $media);
     }

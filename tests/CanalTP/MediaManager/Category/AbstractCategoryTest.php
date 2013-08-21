@@ -1,14 +1,16 @@
 <?php
 
-require_once 'Object/MediaManager/Category/AbstractCategory.php';
+namespace CanalTP\MediaManager\Test\Category;
 
-class AbstractCategoryTest extends PHPUnit_Framework_TestCase
+use CanalTP\MediaManager\Category\AbstractCategory;
+
+class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
 {
     private $stub = null;
 
     public function setUp()
     {
-        $this->stub = $this->getMockForAbstractClass('AbstractCategory');
+        $this->stub = $this->getMockForAbstractClass('CanalTP\MediaManager\Category\AbstractCategory');
     }
 
     public function testSetAndGetName()

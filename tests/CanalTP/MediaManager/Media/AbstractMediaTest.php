@@ -1,15 +1,20 @@
 <?php
 
-require_once 'Object/MediaManager/Category/AbstractCategory.php';
-require_once 'Object/MediaManager/Media/Sound.php';
+namespace CanalTP\MediaManager\Test\Media;
 
-class AbstractMediaTest extends PHPUnit_Framework_TestCase
+use CanalTP\MediaManager\Category\AbstractCategory;
+use CanalTP\MediaManager\Media\MediaType;
+use CanalTP\MediaManager\Media\SoundType;
+use CanalTP\MediaManager\Media\Sound;
+use CanalTP\MediaManager\Category\Line;
+
+class AbstractMediaTest extends \PHPUnit_Framework_TestCase
 {
     private $stub = null;
 
     protected function setUp()
     {
-        $this->stub = $this->getMockForAbstractClass('AbstractMedia');
+        $this->stub = $this->getMockForAbstractClass('CanalTP\MediaManager\Media\AbstractMedia');
     }
 
     public function testInitialisation()

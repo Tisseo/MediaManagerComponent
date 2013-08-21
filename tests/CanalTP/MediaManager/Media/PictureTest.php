@@ -1,8 +1,12 @@
 <?php
 
-require_once 'Object/MediaManager/Media/Picture.php';
+namespace CanalTP\MediaManager\Test\Media;
 
-class PictureTest extends PHPUnit_Framework_TestCase
+use CanalTP\MediaManager\Media\MediaType;
+use CanalTP\MediaManager\Media\PictureType;
+use CanalTP\MediaManager\Media\Picture;
+
+class PictureTest extends \PHPUnit_Framework_TestCase
 {
     private $picture = null;
 

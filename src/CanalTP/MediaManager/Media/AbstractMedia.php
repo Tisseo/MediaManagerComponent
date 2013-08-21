@@ -2,8 +2,10 @@
 
 namespace CanalTP\MediaManager\Media;
 
-require_once 'MediaType.php';
-require_once 'MediaInterface.php';
+use CanalTP\MediaManager\Category\CategoryInterface;
+use CanalTP\MediaManager\Media\MediaInterface;
+use CanalTP\MediaManager\Media\MediaType;
+
 
 abstract class AbstractMedia implements MediaInterface
 {
