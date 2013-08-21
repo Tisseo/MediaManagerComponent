@@ -20,16 +20,20 @@ class SoundTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInternalType(
             'integer', $this->sound->getMediaType(),
-            Registry::get('NOT_CORRECT'));
+            Registry::get('NOT_CORRECT')
+            );
         $this->assertEquals(
             $this->sound->getMediaType(),
-            MediaType::UNKNOWN, Registry::get('NOT_CORRECT'));
+            MediaType::UNKNOWN, Registry::get('NOT_CORRECT')
+            );
         $this->assertInternalType(
             'integer', $this->sound->getType(),
-            Registry::get('NOT_INIT'));
+            Registry::get('NOT_INIT')
+            );
         $this->assertEquals(
             $this->sound->getType(), SoundType::UNKNOWN,
-            Registry::get('NOT_INIT'));
+            Registry::get('NOT_INIT')
+            );
     }
 
     public function testSetAndGetType()
@@ -39,10 +43,12 @@ class SoundTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('integer', $type);
         $this->assertEquals(
             $type, SoundType::UNKNOWN,
-            Registry::get('NOT_INIT'));
+            Registry::get('NOT_INIT')
+            );
         $this->sound->setType(SoundType::MP3);
         $this->assertEquals(
             $this->sound->getType(), SoundType::MP3,
-            Registry::get('NOT_SET'));
+            Registry::get('NOT_SET')
+            );
     }
 }
