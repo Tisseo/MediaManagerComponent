@@ -11,15 +11,18 @@ class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->stub = $this->getMockForAbstractClass('CanalTP\MediaManager\Category\AbstractCategory');
+        $namespace = 'CanalTP\MediaManager\Category\AbstractCategory';
+        $this->stub = $this->getMockForAbstractClass($namespace);
     }
 
     public function testSetAndGetName()
     {
-        $this->assertEquals($this->stub->getName(), 'Unknown',
+        $this->assertEquals(
+            $this->stub->getName(), 'Unknown',
             Registry::get('NOT_INIT'));
         $this->stub->setName('Category');
-        $this->assertEquals($this->stub->getName(), 'Category',
+        $this->assertEquals(
+            $this->stub->getName(), 'Category',
             Registry::get('NOT_SET'));
     }
 }

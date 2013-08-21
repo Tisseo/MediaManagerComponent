@@ -21,11 +21,14 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
 
     public function testInitialisation()
     {
-        $this->assertInternalType('integer', $this->stub->getMediaType(),
+        $this->assertInternalType(
+            'integer', $this->stub->getMediaType(),
             Registry::get('NOT_CORRECT'));
-        $this->assertEquals($this->stub->getMediaType(), MediaType::UNKNOWN,
+        $this->assertEquals(
+            $this->stub->getMediaType(), MediaType::UNKNOWN,
             Registry::get('NOT_CORRECT'));
-        $this->assertInternalType('integer', $this->stub->getSize(),
+        $this->assertInternalType(
+            'integer', $this->stub->getSize(),
             Registry::get('NOT_INIT'));
         $this->assertEquals($this->stub->getSize(), 0,
             Registry::get('NOT_INIT'));
@@ -36,10 +39,12 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $type = $this->stub->getType();
 
         $this->assertInternalType('integer', $type);
-        $this->assertEquals($type, SoundType::UNKNOWN,
+        $this->assertEquals(
+            $type, SoundType::UNKNOWN,
             Registry::get('NOT_INIT'));
         $this->stub->setType(SoundType::UNKNOWN);
-        $this->assertEquals($this->stub->getType(), SoundType::UNKNOWN,
+        $this->assertEquals(
+            $this->stub->getType(), SoundType::UNKNOWN,
             Registry::get('NOT_SET'));
     }
 
@@ -48,10 +53,12 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $mediaType = $this->stub->getMediaType();
 
         $this->assertInternalType('integer', $mediaType);
-        $this->assertEquals($mediaType, MediaType::UNKNOWN,
+        $this->assertEquals(
+            $mediaType, MediaType::UNKNOWN,
             Registry::get('NOT_INIT'));
         $this->stub->setMediaType(MediaType::SOUND);
-        $this->assertEquals($this->stub->getMediaType(), MediaType::SOUND,
+        $this->assertEquals(
+            $this->stub->getMediaType(), MediaType::SOUND,
             Registry::get('NOT_SET'));
     }
 
@@ -62,7 +69,8 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('integer', $size);
         $this->assertNotNull($size, Registry::get('NOT_INIT'));
         $this->stub->setSize(42.42);
-        $this->assertEquals($this->stub->getSize(), 42.42,
+        $this->assertEquals(
+            $this->stub->getSize(), 42.42,
             Registry::get('NOT_SET'));
     }
 
@@ -74,7 +82,8 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('integer', $expirationDate);
         $this->assertNotNull($expirationDate, Registry::get('NOT_INIT'));
         $this->stub->setExpirationDate($date);
-        $this->assertEquals($this->stub->getExpirationDate(), $date,
+        $this->assertEquals(
+            $this->stub->getExpirationDate(), $date,
             Registry::get('NOT_SET'));
     }
 
@@ -82,8 +91,10 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->stub->getPath(), Registry::get('NOT_INIT'));
         $this->stub->setPath("/my/path/");
-        $this->assertInternalType('string', $this->stub->getPath());
-        $this->assertEquals($this->stub->getPath(), "/my/path/",
+        $this->assertInternalType(
+            'string', $this->stub->getPath());
+        $this->assertEquals(
+            $this->stub->getPath(), "/my/path/",
             Registry::get('NOT_SET'));
     }
 
@@ -91,10 +102,12 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
     {
         $company = 42;
 
-        $this->assertNull($this->stub->getCompany(),
+        $this->assertNull(
+            $this->stub->getCompany(),
             Registry::get('NOT_INIT'));
         $this->stub->setCompany($company);
-        $this->assertEquals($this->stub->getCompany(),
+        $this->assertEquals(
+            $this->stub->getCompany(),
             $company, Registry::get('NOT_SET'));
     }
 
@@ -102,10 +115,12 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
     {
         $category = new Line();
 
-        $this->assertNull($this->stub->getCategory(),
+        $this->assertNull(
+            $this->stub->getCategory(),
             Registry::get('NOT_INIT'));
         $this->stub->setCategory($category);
-        $this->assertEquals($this->stub->getCategory(), $category,
+        $this->assertEquals(
+            $this->stub->getCategory(), $category,
             Registry::get('NOT_SET'));
     }
 }

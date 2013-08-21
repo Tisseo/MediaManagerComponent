@@ -18,21 +18,27 @@ class PictureTest extends \PHPUnit_Framework_TestCase
 
     public function testInitialisation()
     {
-        $this->assertInternalType('integer', $this->picture->getMediaType(),
+        $this->assertInternalType(
+            'integer', $this->picture->getMediaType(),
             Registry::get('NOT_CORRECT'));
-        $this->assertEquals($this->picture->getMediaType(), MediaType::UNKNOWN,
+        $this->assertEquals(
+            $this->picture->getMediaType(), MediaType::UNKNOWN,
             Registry::get('NOT_CORRECT'));
         $this->assertInternalType('integer', $this->picture->getType(),
             Registry::get('NOT_INIT'));
-        $this->assertEquals($this->picture->getType(), PictureType::UNKNOWN,
+        $this->assertEquals(
+            $this->picture->getType(), PictureType::UNKNOWN,
             Registry::get('NOT_INIT'));
         $this->assertInternalType('integer', $this->picture->getSizeX(),
             Registry::get('NOT_INIT'));
-        $this->assertEquals($this->picture->getSizeX(), 0,
+        $this->assertEquals(
+            $this->picture->getSizeX(), 0,
             Registry::get('NOT_INIT'));
-        $this->assertInternalType('integer', $this->picture->getSizeY(),
+        $this->assertInternalType(
+            'integer', $this->picture->getSizeY(),
             Registry::get('NOT_INIT'));
-        $this->assertEquals($this->picture->getSizeY(), 0,
+        $this->assertEquals(
+            $this->picture->getSizeY(), 0,
             Registry::get('NOT_INIT'));
     }
 
@@ -41,10 +47,12 @@ class PictureTest extends \PHPUnit_Framework_TestCase
         $type = $this->picture->getType();
 
         $this->assertInternalType('integer', $type);
-        $this->assertEquals($type, PictureType::UNKNOWN,
+        $this->assertEquals(
+            $type, PictureType::UNKNOWN,
          Registry::get('NOT_INIT'));
         $this->picture->setType(PictureType::JPG);
-        $this->assertEquals($this->picture->getType(), PictureType::JPG,
+        $this->assertEquals(
+            $this->picture->getType(), PictureType::JPG,
             Registry::get('NOT_SET'));
     }
 
@@ -55,7 +63,8 @@ class PictureTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('integer', $sizeX);
         $this->assertEquals($sizeX, 0, Registry::get('NOT_INIT'));
         $this->picture->setSizeX(42);
-        $this->assertEquals($this->picture->getSizeX(), 42,
+        $this->assertEquals(
+            $this->picture->getSizeX(), 42,
             Registry::get('NOT_SET'));
     }
 
@@ -66,7 +75,8 @@ class PictureTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('integer', $sizeY);
         $this->assertEquals($sizeY, 0, Registry::get('NOT_INIT'));
         $this->picture->setSizeY(42);
-        $this->assertEquals($this->picture->getSizeY(), 42,
+        $this->assertEquals(
+            $this->picture->getSizeY(), 42,
             Registry::get('NOT_SET'));
     }
 }

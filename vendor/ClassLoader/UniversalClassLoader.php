@@ -315,8 +315,6 @@ class UniversalClassLoader
         }
 
         if ($this->useIncludePath && $file = stream_resolve_include_path($nc))
-        {
             return $file;
-        }
     }
 }
