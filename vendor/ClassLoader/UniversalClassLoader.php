@@ -17,7 +17,7 @@ namespace Symfony\Component\ClassLoader;
  * It is able to load classes that use either:
  *
  *  * The technical interoperability standards for PHP 5.3 namespaces and
- *    class names (https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md);
+ *    class names 
  *
  *  * The PEAR naming convention for classes (http://pear.php.net/).
  *
@@ -101,7 +101,7 @@ class UniversalClassLoader
     /**
      * Gets the configured class prefixes.
      *
-     * @return array A hash with class prefixes as keys and directories as values
+     * @return array A hash with class pref as keys and directories as values
      */
     public function getPrefixes()
     {
@@ -175,7 +175,7 @@ class UniversalClassLoader
     /**
      * Registers an array of namespaces
      *
-     * @param array $namespaces An array of namespaces (namespaces as keys and locations as values)
+     * @param array $namespaces An array of namespaces
      *
      * @api
      */
@@ -202,7 +202,7 @@ class UniversalClassLoader
     /**
      * Registers an array of classes using the PEAR naming convention.
      *
-     * @param array $classes An array of classes (prefixes as keys and locations as values)
+     * @param array $classes An array of classes
      *
      * @api
      */
@@ -267,14 +267,16 @@ class UniversalClassLoader
             // namespaced class name
             $namespace = substr($class, 0, $pos);
             $className = substr($class, $pos + 1);
-            $normalizedClass = str_replace('\\', DIRECTORY_SEPARATOR, $namespace).DIRECTORY_SEPARATOR.str_replace('_', DIRECTORY_SEPARATOR, $className).'.php';
+            $nc = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
+            $nc .= DIRECTORY_SEPARATOR;
+            $nc .= str_replace('_', DIRECTORY_SEPARATOR, $className).'.php';
             foreach ($this->namespaces as $ns => $dirs) {
                 if (0 !== strpos($namespace, $ns)) {
                     continue;
                 }
 
                 foreach ($dirs as $dir) {
-                    $file = $dir.DIRECTORY_SEPARATOR.$normalizedClass;
+                    $file = $dir.DIRECTORY_SEPARATOR.$nc;
                     if (is_file($file)) {
                         return $file;
                     }
@@ -282,7 +284,7 @@ class UniversalClassLoader
             }
 
             foreach ($this->namespaceFallbacks as $dir) {
-                $file = $dir.DIRECTORY_SEPARATOR.$normalizedClass;
+                $file = $dir.DIRECTORY_SEPARATOR.$nc;
                 if (is_file($file)) {
                     return $file;
                 }
@@ -290,14 +292,14 @@ class UniversalClassLoader
 
         } else {
             // PEAR-like class name
-            $normalizedClass = str_replace('_', DIRECTORY_SEPARATOR, $class).'.php';
+            $nc = str_replace('_', DIRECTORY_SEPARATOR, $class).'.php';
             foreach ($this->prefixes as $prefix => $dirs) {
                 if (0 !== strpos($class, $prefix)) {
                     continue;
                 }
 
                 foreach ($dirs as $dir) {
-                    $file = $dir.DIRECTORY_SEPARATOR.$normalizedClass;
+                    $file = $dir.DIRECTORY_SEPARATOR.$nc;
                     if (is_file($file)) {
                         return $file;
                     }
@@ -305,14 +307,15 @@ class UniversalClassLoader
             }
 
             foreach ($this->prefixFallbacks as $dir) {
-                $file = $dir.DIRECTORY_SEPARATOR.$normalizedClass;
+                $file = $dir.DIRECTORY_SEPARATOR.$nc;
                 if (is_file($file)) {
                     return $file;
                 }
             }
         }
 
-        if ($this->useIncludePath && $file = stream_resolve_include_path($normalizedClass)) {
+        if ($this->useIncludePath && $file = stream_resolve_include_path($nc))
+        {
             return $file;
         }
     }

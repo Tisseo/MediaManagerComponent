@@ -4,15 +4,15 @@ namespace CanalTP\MediaManager;
 
 class Registry
 {
-    private static $_strings = false;
+    private static $strings = false;
 
     public static function set($filePath)
     {
-        self::$_strings = parse_ini_file($filePath);
+        self::$strings = parse_ini_file($filePath);
     }
 
     public static function get($index)
     {
-        return (self::$_strings[$index]);
+        return (self::$strings[$index]);
     }
 }
