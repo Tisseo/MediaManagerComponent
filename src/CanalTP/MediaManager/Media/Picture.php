@@ -38,5 +38,4 @@ class Picture extends AbstractMedia
     {
         $this->sizeY = $sizeY;
     }
-
 }

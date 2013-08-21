@@ -6,7 +6,6 @@ use CanalTP\MediaManager\Category\CategoryInterface;
 use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Media\MediaType;
 
-
 abstract class AbstractMedia implements MediaInterface
 {
     protected $company = null;

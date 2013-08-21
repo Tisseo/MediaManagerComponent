@@ -2,6 +2,7 @@
 
 namespace CanalTP\MediaManager\Test\Category;
 
+use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Category\AbstractCategory;
 
 class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
@@ -15,8 +16,10 @@ class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetName()
     {
-        $this->assertEquals($this->stub->getName(), 'Unknown', 'The value name is not correctly initialized.');
+        $this->assertEquals($this->stub->getName(), 'Unknown',
+            Registry::get('NOT_INIT'));
         $this->stub->setName('Category');
-        $this->assertEquals($this->stub->getName(), 'Category', 'The value name can\'t be set.');
+        $this->assertEquals($this->stub->getName(), 'Category',
+            Registry::get('NOT_SET'));
     }
 }
