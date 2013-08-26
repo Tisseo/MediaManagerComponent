@@ -22,7 +22,8 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
         $result = $this->strategy->generatePath($path, $companyName);
 
         $this->assertInternalType('string', $result);
-        $this->assertEquals($result, $return,
+        $this->assertEquals(
+            $result, $return,
             Registry::get('STRATEGY_PATH')
         );
     }

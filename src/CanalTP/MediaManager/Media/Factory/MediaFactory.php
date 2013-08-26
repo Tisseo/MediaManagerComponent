@@ -42,11 +42,11 @@ class MediaFactory implements MediaFactoryInterface
 
         switch ($this->type) {
             case MediaType::SOUND:
-            $media = new Sound();
-            break;
+                $media = new Sound();
+                break;
             case MediaType::PICTURE:
-            $media = new Picture();
-            break;
+                $media = new Picture();
+                break;
         }
         return ($media);
     }
