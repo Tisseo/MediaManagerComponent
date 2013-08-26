@@ -5,7 +5,7 @@ namespace CanalTP\MediaManager\Test\Strategy;
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Strategy\DefaultStrategy;
 
-class DefaultTest extends \PHPUnit_Framework_TestCase
+class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
 {
     private $strategy = null;
 
