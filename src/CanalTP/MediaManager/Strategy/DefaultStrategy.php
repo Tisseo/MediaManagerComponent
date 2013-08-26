@@ -9,6 +9,6 @@ class DefaultStrategy extends AbstractStrategy
 {
     public function generatePath($path, $companyName)
     {
-        return (Registry::get('TMP_PATH').$companyName.'/'.basename($path));
+        return (Registry::get('TMP_DIR').$companyName.'/'.basename($path));
     }
 }

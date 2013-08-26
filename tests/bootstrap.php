@@ -11,7 +11,8 @@ $loader = new UniversalClassLoader();
 $loader->registerNamespace('CanalTP\\MediaManager\\Category', $folder);
 $loader->registerNamespace('CanalTP\\MediaManager\\Media', $folder);
 $loader->registerNamespace('CanalTP\\MediaManager\\Strategy', $folder);
+$loader->registerNamespace('CanalTP\\MediaManager\\Storage', $folder);
 $loader->register();
 
-Registry::add(__DIR__.'/../tests/string.ini');
+Registry::add(__DIR__.'/../tests/strings.ini');
 Registry::add(__DIR__.'/../tests/messages.ini');
