@@ -2,6 +2,7 @@
 
 namespace CanalTP\MediaManager\Category;
 
+use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Category\CategoryInterface;
 
 abstract class AbstractCategory implements CategoryInterface

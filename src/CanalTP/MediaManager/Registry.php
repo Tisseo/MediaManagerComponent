@@ -2,6 +2,9 @@
 
 namespace CanalTP\MediaManager;
 
+/**
+ * @codeCoverageIgnore
+ */
 class Registry
 {
     private static $strings = array();

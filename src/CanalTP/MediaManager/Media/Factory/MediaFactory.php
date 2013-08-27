@@ -24,9 +24,6 @@ class MediaFactory implements MediaFactoryInterface
         $this->type = null;
 
         switch ($this->mime) {
-            case 'image/gif':
-                $this->type = MediaType::PICTURE;
-                break;
             case 'image/jpeg':
                 $this->type = MediaType::PICTURE;
                 break;

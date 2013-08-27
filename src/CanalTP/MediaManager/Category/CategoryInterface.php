@@ -2,6 +2,8 @@
 
 namespace CanalTP\MediaManager\Category;
 
+use CanalTP\MediaManager\Media\MediaInterface;
+
 interface CategoryInterface
 {
     public function getMediaArray();

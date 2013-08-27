@@ -3,6 +3,7 @@
 namespace CanalTP\MediaManager\Test\Category;
 
 use CanalTP\MediaManager\Registry;
+use CanalTP\MediaManager\Media\Factory\MediaFactory;
 use CanalTP\MediaManager\Category\AbstractCategory;
 
 class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
@@ -15,16 +16,38 @@ class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
         $this->stub = $this->getMockForAbstractClass($namespace);
     }
 
-    public function testSetAndGetName()
+    public function testInitialisation()
     {
         $this->assertEquals(
             $this->stub->getName(), 'Unknown',
             Registry::get('NOT_INIT')
         );
+    }
+
+    public function testSetAndGetName()
+    {
         $this->stub->setName('Category');
         $this->assertEquals(
             $this->stub->getName(), 'Category',
             Registry::get('NOT_SET')
+        );
+    }
+
+    public function testAddMedia()
+    {
+        $factory = new MediaFactory();
+        $sound = $factory->create(__DIR__ . Registry::get('SOUND_TEST'));
+        $picture = $factory->create(__DIR__ . Registry::get('PICTURE_TEST'));
+
+        $this->stub->addMedia($sound);
+        $this->assertEquals(
+            $this->stub->getMediaNumber(), 1,
+            Registry::get('CATEGORY_ADD_MEDIA')
+        );
+        $this->stub->addMedia($picture);
+        $this->assertEquals(
+            $this->stub->getMediaNumber(), 2,
+            Registry::get('CATEGORY_ADD_MEDIA')
         );
     }
 }
