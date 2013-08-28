@@ -25,7 +25,7 @@ class ConfigurationBuilder implements ConfigurationBuilderInterface
             case 'filesystem':
                 $this->initFileSystemStorage($params);
                 break;
-        }        
+        }
     }
 
     private function initStrategy($params)

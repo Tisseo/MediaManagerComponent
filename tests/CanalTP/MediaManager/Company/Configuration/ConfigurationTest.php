@@ -9,7 +9,6 @@ use CanalTP\MediaManager\Strategy\DefaultStrategy;
 use CanalTP\MediaManager\Storage\StorageInterface;
 use CanalTP\MediaManager\Strategy\StrategyInterface;
 
-
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     private $configuration = null;
