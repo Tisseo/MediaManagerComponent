@@ -14,19 +14,21 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
     private $storage = null;
     private $strategy = null;
     private $media = null;
+    private $company = null;
     private $filePath = null;
 
     public function setUp()
     {
         $factory = new MediaFactory();
-        $company = new Company(new Configuration());
-        $company->setName('My Company');
+        $this->company = new Company();
+        $this->company->setConfiguration(new Configuration());
+        $this->company->setName('My Company');
         $this->strategy = new DefaultStrategy();
         $this->storage = new FileSystem();
         $this->filePath = Registry::get('/') . Registry::get('SOUND_TEST');
         $this->media = $factory->create($this->filePath);
         $this->media->setPath($this->filePath);
-        $this->media->setCompany($company);
+        $this->media->setCompany($this->company);
         $this->storage->setPath(Registry::get('TMP_DIR'));
 
         $this->assertTrue(
@@ -50,5 +52,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         rename($this->media->getPath(), $this->filePath);
+        rmdir(Registry::get('TMP_DIR') . $this->company->getName());
+        rmdir(Registry::get('TMP_DIR'));
     }
 }

@@ -3,7 +3,9 @@
 namespace CanalTP\MediaManager\Test\Media;
 
 use CanalTP\MediaManager\Registry;
+use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Category\AbstractCategory;
+use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Media\MediaType;
 use CanalTP\MediaManager\Media\SoundMediaType;
 use CanalTP\MediaManager\Media\SoundMedia;
@@ -111,13 +113,29 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
 
     public function testSetAndGetCompany()
     {
-        $company = 42;
-
+        $params = array(
+            'company' => array(
+                'storage' => array(
+                    'type' => 'filesystem',
+                    array('path' => '/tmp/MediaManager/'),
+                ),
+                'strategy' => 'default'
+            ),
+        );
+        $configBuilder = new ConfigurationBuilder();
+        $configBuilder->buildConfiguration($params);
+        $company = new Company($configBuilder->getConfiguration());
+        $company->setConfiguration($configBuilder->getConfiguration());
         $this->assertNull(
             $this->stub->getCompany(),
             Registry::get('NOT_INIT')
         );
         $this->stub->setCompany($company);
+        $this->assertInstanceOf(
+            Registry::get('COMPANY_INTERFACE'),
+            $this->stub->getCompany(),
+            Registry::get('NOT_SET')
+        );
         $this->assertEquals(
             $this->stub->getCompany(),
             $company, Registry::get('NOT_SET')

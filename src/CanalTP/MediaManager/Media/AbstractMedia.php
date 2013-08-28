@@ -3,6 +3,7 @@
 namespace CanalTP\MediaManager\Media;
 
 use CanalTP\MediaManager\Category\CategoryInterface;
+use CanalTP\MediaManager\Company\CompanyInterface;
 use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Media\MediaType;
 
@@ -77,7 +78,7 @@ abstract class AbstractMedia implements MediaInterface
         return ($this->company);
     }
 
-    public function setCompany($company)
+    public function setCompany(CompanyInterface $company)
     {
         $this->company = $company;
     }
