@@ -27,7 +27,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         );
         $this->configuration->setStorage(new FileSystem());
         $this->assertInstanceOf(
-            'CanalTP\MediaManager\Storage\StorageInterface',
+            Registry::get('STORAGE_INTERFACE'),
             $this->configuration->getStorage()
         );
     }
@@ -40,7 +40,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
         );
         $this->configuration->setStrategy(new DefaultStrategy());
         $this->assertInstanceOf(
-            'CanalTP\MediaManager\Strategy\StrategyInterface',
+            Registry::get('STRATEGY_INTERFACE'),
             $this->configuration->getStrategy()
         );
     }

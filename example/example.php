@@ -26,7 +26,11 @@ $configurationBuilder->buildConfiguration($array);
 $company->setName("My_Company");
 $company->setConfiguration($configurationBuilder->getConfiguration());
 
-$mediaBuilder->buildMedia('../tests/data/CanalTP/sound/jingle_SNCF.mp3', $company, new Line());
+$mediaBuilder->buildMedia(
+    '../tests/data/CanalTP/sound/jingle_SNCF.mp3',
+    $company,
+    new Line()
+    );
 $media = $mediaBuilder->getMedia();
 
-$company->getConfiguration()->getStorage()->addMedia($media, $company->getConfiguration()->getStrategy());
+$company->getStorage()->addMedia($media, $company->getStrategy());

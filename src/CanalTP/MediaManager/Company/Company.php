@@ -25,6 +25,16 @@ class Company implements CompanyInterface
         return ($this->configuration);
     }
 
+    public function getStorage()
+    {
+        return ($this->configuration->getStorage());
+    }
+
+    public function getStrategy()
+    {
+        return ($this->configuration->getStrategy());
+    }
+
     public function getName()
     {
         return ($this->name);
