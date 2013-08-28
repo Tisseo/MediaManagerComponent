@@ -117,7 +117,7 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
             'company' => array(
                 'storage' => array(
                     'type' => 'filesystem',
-                    array('path' => '/tmp/MediaManager/'),
+                    'path' => '/tmp/MediaManager/',
                 ),
                 'strategy' => 'default'
             ),

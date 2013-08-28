@@ -13,28 +13,36 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->company = new Company();
-    }
-
-    public function testGetConfiguration()
-    {
         $params = array(
             'company' => array(
                 'storage' => array(
                     'type' => 'filesystem',
-                    array('path' => '/tmp/MediaManager/'),
+                    'path' => '/tmp/MediaManager/',
                 ),
                 'strategy' => 'default'
             ),
         );
-        $configBuilder = new ConfigurationBuilder();
-        $configBuilder->buildConfiguration($params);
+        $this->company = new Company();
+        $this->configBuilder = new ConfigurationBuilder();
+
+        $this->configBuilder->buildConfiguration($params);
+        $this->company->setConfiguration(
+            $this->configBuilder->getConfiguration()
+        );
+    }
+
+    public function testInitialisation()
+    {
+        $company = new Company();
 
         $this->assertNull(
-            $this->company->getConfiguration(),
+            $company->getConfiguration(),
             Registry::get('NOT_INIT')
         );
-        $this->company->setConfiguration($configBuilder->getConfiguration());
+    }
+
+    public function testGetConfiguration()
+    {
         $this->assertInstanceOf(
             Registry::get('CONFIGURATION_INTERFACE'),
             $this->company->getConfiguration(),
@@ -56,6 +64,24 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $this->company->getName(),
             $newName,
+            Registry::get('NOT_SET')
+        );
+    }
+
+    public function testGetStorage()
+    {
+        $this->assertInstanceOf(
+            Registry::get('STORAGE_INTERFACE'),
+            $this->company->getStorage(),
+            Registry::get('NOT_SET')
+        );
+    }
+
+    public function testGetStrategy()
+    {
+        $this->assertInstanceOf(
+            Registry::get('STRATEGY_INTERFACE'),
+            $this->company->getStrategy(),
             Registry::get('NOT_SET')
         );
     }

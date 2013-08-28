@@ -20,6 +20,7 @@ class MediaBuilder implements MediaBuilderInterface
         $mediaFactory = new MediaFactory();
         $this->media = $mediaFactory->create($file);
 
+        $this->media->setPath($file);
         $this->media->setCompany($company);
         $this->media->setCategory($category);
     }

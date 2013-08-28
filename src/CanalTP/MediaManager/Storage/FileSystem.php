@@ -18,7 +18,6 @@ class FileSystem extends AbstractStorage
             $media->getPath(),
             $media->getCompany()->getName()
         );
-
         if (!is_dir(dirname($path))) {
             mkdir(dirname($path), 0777, true);
         }
