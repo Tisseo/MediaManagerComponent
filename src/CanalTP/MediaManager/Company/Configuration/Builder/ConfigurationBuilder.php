@@ -15,7 +15,7 @@ class ConfigurationBuilder implements ConfigurationBuilderInterface
     {
         $filesystem = new FileSystem();
 
-        $filesystem->setPath($params['company']['storage']['type']['path']);
+        $filesystem->setPath($params['company']['storage']['path']);
         $this->configuration->setStorage($filesystem);
     }
 

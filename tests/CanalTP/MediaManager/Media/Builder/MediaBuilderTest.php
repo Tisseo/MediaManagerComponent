@@ -8,7 +8,6 @@ use CanalTP\MediaManager\Category\Line;
 use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 
-
 class MediaBuilderTest extends \PHPUnit_Framework_TestCase
 {
     private $builder = null;
@@ -22,7 +21,7 @@ class MediaBuilderTest extends \PHPUnit_Framework_TestCase
             'company' => array(
                 'storage' => array(
                     'type' => 'filesystem',
-                    array('path' => '/tmp/MediaManager/'),
+                    'path' => '/tmp/MediaManager/',
                 ),
                 'strategy' => 'default'
             ),
