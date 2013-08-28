@@ -1,0 +1,21 @@
+{
+    "name": "CanalTP/MediaManager",
+    "type": "library",
+    "description": "Media Manager Component",
+    "keywords": [],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rémy Abi-Khalil",
+            "email": "remy.abikhalil@canaltp.fr"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "autoload": {
+        "psr-0": { "CanalTP\\MediaManager": "src/" }
+    },
+    "target-dir": "CanalTP/Component",
+    "minimum-stability": "dev"
+}

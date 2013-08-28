@@ -21,7 +21,6 @@ class ConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
                 'strategy' => 'default'
             ),
         );
-
         $this->builder = new ConfigurationBuilder();
     }
 

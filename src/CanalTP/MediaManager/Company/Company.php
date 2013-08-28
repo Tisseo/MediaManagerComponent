@@ -10,17 +10,20 @@ class Company implements CompanyInterface
     private $configuration = null;
     private $name = null;
 
-    public function __construct(ConfigurationInterface $config)
+    public function __construct()
+    {
+        $this->name = 'Unknown';
+    }
+
+    public function setConfiguration(ConfigurationInterface $config)
     {
         $this->configuration = $config;
-        $this->name = 'Unknown';
     }
 
     public function getConfiguration()
     {
         return ($this->configuration);
     }
-
 
     public function getName()
     {
