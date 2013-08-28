@@ -35,9 +35,11 @@ class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
 
     public function testAddMedia()
     {
+        $sFile = Registry::get('/') . Registry::get('SOUND_TEST');
+        $pFile = Registry::get('/') . Registry::get('PICTURE_TEST');
         $factory = new MediaFactory();
-        $sound = $factory->create(__DIR__ . Registry::get('SOUND_TEST'));
-        $picture = $factory->create(__DIR__ . Registry::get('PICTURE_TEST'));
+        $sound = $factory->create($sFile);
+        $picture = $factory->create($pFile);
 
         $this->stub->addMedia($sound);
         $this->assertEquals(

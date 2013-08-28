@@ -2,7 +2,7 @@
 
 namespace CanalTP\MediaManager\Media;
 
-class PictureType
+class PictureMediaType
 {
     const UNKNOWN       = 0;
     const JPG           = 1;

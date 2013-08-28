@@ -6,5 +6,5 @@ use CanalTP\MediaManager\Media\MediaType;
 
 interface MediaFactoryInterface
 {
-    public function create($type);
+    public function create($fileName);
 }

@@ -16,9 +16,9 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratePath()
     {
-        $path = __DIR__ . Registry::get('DATA_DIR') . '/logo.jpg';
+        $path = Registry::get('/') . Registry::get('DATA_DIR') . '/logo.jpg';
         $companyName = 'CanalTP';
-        $return = Registry::get('TMP_DIR') . $companyName . '/logo.jpg';
+        $return = $companyName . '/logo.jpg';
         $result = $this->strategy->generatePath($path, $companyName);
 
         $this->assertInternalType('string', $result);

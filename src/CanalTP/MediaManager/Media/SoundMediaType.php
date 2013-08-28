@@ -2,7 +2,7 @@
 
 namespace CanalTP\MediaManager\Media;
 
-class SoundType
+class SoundMediaType
 {
     const UNKNOWN       = 0;
     const MP3           = 1;

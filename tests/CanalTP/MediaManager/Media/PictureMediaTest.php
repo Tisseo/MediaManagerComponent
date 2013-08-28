@@ -4,16 +4,16 @@ namespace CanalTP\MediaManager\Test\Media;
 
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Media\MediaType;
-use CanalTP\MediaManager\Media\PictureType;
-use CanalTP\MediaManager\Media\Picture;
+use CanalTP\MediaManager\Media\PictureMediaType;
+use CanalTP\MediaManager\Media\PictureMedia;
 
-class PictureTest extends \PHPUnit_Framework_TestCase
+class PictureMediaTest extends \PHPUnit_Framework_TestCase
 {
     private $picture = null;
 
     public function setUp()
     {
-        $this->picture = new Picture();
+        $this->picture = new PictureMedia();
     }
 
     public function testInitialisation()
@@ -31,7 +31,7 @@ class PictureTest extends \PHPUnit_Framework_TestCase
             Registry::get('NOT_INIT')
         );
         $this->assertEquals(
-            $this->picture->getType(), PictureType::UNKNOWN,
+            $this->picture->getType(), PictureMediaType::UNKNOWN,
             Registry::get('NOT_INIT')
         );
         $this->assertInternalType(
@@ -58,12 +58,12 @@ class PictureTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('integer', $type);
         $this->assertEquals(
-            $type, PictureType::UNKNOWN,
+            $type, PictureMediaType::UNKNOWN,
             Registry::get('NOT_INIT')
         );
-        $this->picture->setType(PictureType::JPG);
+        $this->picture->setType(PictureMediaType::JPG);
         $this->assertEquals(
-            $this->picture->getType(), PictureType::JPG,
+            $this->picture->getType(), PictureMediaType::JPG,
             Registry::get('NOT_SET')
         );
     }

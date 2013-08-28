@@ -5,8 +5,8 @@ namespace CanalTP\MediaManager\Test\Media;
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Category\AbstractCategory;
 use CanalTP\MediaManager\Media\MediaType;
-use CanalTP\MediaManager\Media\SoundType;
-use CanalTP\MediaManager\Media\Sound;
+use CanalTP\MediaManager\Media\SoundMediaType;
+use CanalTP\MediaManager\Media\SoundMedia;
 use CanalTP\MediaManager\Category\Line;
 
 class AbstractMediaTest extends \PHPUnit_Framework_TestCase
@@ -45,12 +45,12 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('integer', $type);
         $this->assertEquals(
-            $type, SoundType::UNKNOWN,
+            $type, SoundMediaType::UNKNOWN,
             Registry::get('NOT_INIT')
         );
-        $this->stub->setType(SoundType::UNKNOWN);
+        $this->stub->setType(SoundMediaType::UNKNOWN);
         $this->assertEquals(
-            $this->stub->getType(), SoundType::UNKNOWN,
+            $this->stub->getType(), SoundMediaType::UNKNOWN,
             Registry::get('NOT_SET')
         );
     }

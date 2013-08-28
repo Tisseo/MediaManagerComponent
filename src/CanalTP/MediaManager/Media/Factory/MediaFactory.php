@@ -3,8 +3,8 @@
 namespace CanalTP\MediaManager\Media\Factory;
 
 use CanalTP\MediaManager\Media\MediaType;
-use CanalTP\MediaManager\Media\Sound;
-use CanalTP\MediaManager\Media\Picture;
+use CanalTP\MediaManager\Media\SoundMedia;
+use CanalTP\MediaManager\Media\PictureMedia;
 use CanalTP\MediaManager\Media\Factory\MediaFactoryInterface;
 
 class MediaFactory implements MediaFactoryInterface
@@ -39,10 +39,10 @@ class MediaFactory implements MediaFactoryInterface
 
         switch ($this->type) {
             case MediaType::SOUND:
-                $media = new Sound();
+                $media = new SoundMedia();
                 break;
             case MediaType::PICTURE:
-                $media = new Picture();
+                $media = new PictureMedia();
                 break;
         }
         return ($media);

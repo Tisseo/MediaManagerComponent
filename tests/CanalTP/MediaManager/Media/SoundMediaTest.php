@@ -4,16 +4,16 @@ namespace CanalTP\MediaManager\Test\Media;
 
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Media\MediaType;
-use CanalTP\MediaManager\Media\SoundType;
-use CanalTP\MediaManager\Media\Sound;
+use CanalTP\MediaManager\Media\SoundMediaType;
+use CanalTP\MediaManager\Media\SoundMedia;
 
-class SoundTest extends \PHPUnit_Framework_TestCase
+class SoundMediaTest extends \PHPUnit_Framework_TestCase
 {
     private $sound = null;
 
     public function setUp()
     {
-        $this->sound = new Sound();
+        $this->sound = new SoundMedia();
     }
 
     public function testInitialisation()
@@ -31,7 +31,7 @@ class SoundTest extends \PHPUnit_Framework_TestCase
             Registry::get('NOT_INIT')
         );
         $this->assertEquals(
-            $this->sound->getType(), SoundType::UNKNOWN,
+            $this->sound->getType(), SoundMediaType::UNKNOWN,
             Registry::get('NOT_INIT')
         );
     }
@@ -42,12 +42,12 @@ class SoundTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('integer', $type);
         $this->assertEquals(
-            $type, SoundType::UNKNOWN,
+            $type, SoundMediaType::UNKNOWN,
             Registry::get('NOT_INIT')
         );
-        $this->sound->setType(SoundType::MP3);
+        $this->sound->setType(SoundMediaType::MP3);
         $this->assertEquals(
-            $this->sound->getType(), SoundType::MP3,
+            $this->sound->getType(), SoundMediaType::MP3,
             Registry::get('NOT_SET')
         );
     }

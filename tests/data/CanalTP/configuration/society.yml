@@ -1,0 +1,5 @@
+society:
+    storage:
+        type: 'filesystem'
+            path: '/tmp/MediaManager/'
+        strategy: 'default'

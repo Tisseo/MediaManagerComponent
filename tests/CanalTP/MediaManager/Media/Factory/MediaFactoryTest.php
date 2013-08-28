@@ -17,15 +17,15 @@ class PictureTest extends \PHPUnit_Framework_TestCase
 
     public function testInstanciation()
     {
-        $baseDir = __DIR__ . '/..';
+        $baseDir = Registry::get('/');
 
         $this->assertInstanceOf(
-            'CanalTP\MediaManager\Media\Sound',
+            'CanalTP\MediaManager\Media\SoundMedia',
             $this->factory->create($baseDir . Registry::get('SOUND_TEST')),
             Registry::get('FACTORY_CREATE')
         );
         $this->assertInstanceOf(
-            'CanalTP\MediaManager\Media\Picture',
+            'CanalTP\MediaManager\Media\PictureMedia',
             $this->factory->create($baseDir . Registry::get('PICTURE_TEST')),
             Registry::get('FACTORY_CREATE')
         );
