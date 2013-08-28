@@ -30,7 +30,7 @@ $mediaBuilder->buildMedia(
     '../tests/data/CanalTP/sound/jingle_SNCF.mp3',
     $company,
     new Line()
-    );
+);
 $media = $mediaBuilder->getMedia();
 
 $company->getStorage()->addMedia($media, $company->getStrategy());
