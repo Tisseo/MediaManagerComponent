@@ -11,6 +11,11 @@ class ConfigurationBuilder implements ConfigurationBuilderInterface
 {
     private $configuration = null;
 
+    private function getConfiguration()
+    {
+        return ($this->configuration);
+    }
+
     private function initFileSystemStorage($params)
     {
         $filesystem = new FileSystem();
@@ -43,10 +48,6 @@ class ConfigurationBuilder implements ConfigurationBuilderInterface
 
         $this->initStorage($params);
         $this->initStrategy($params);
-    }
-
-    public function getConfiguration()
-    {
-        return ($this->configuration);
+        return ($this->getConfiguration());
     }
 }

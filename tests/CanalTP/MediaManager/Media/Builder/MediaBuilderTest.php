@@ -28,10 +28,11 @@ class MediaBuilderTest extends \PHPUnit_Framework_TestCase
         );
         $this->mediaPath = Registry::get('/') . Registry::get('SOUND_TEST');
         $configBuilder = new ConfigurationBuilder();
-        $configBuilder->buildConfiguration($params);
         $this->builder = new MediaBuilder();
         $this->company = new Company();
-        $this->company->setConfiguration($configBuilder->getConfiguration());
+        $this->company->setConfiguration(
+            $configBuilder->buildConfiguration($params)
+        );
         $this->category = new Line();
     }
 

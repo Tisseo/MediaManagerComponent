@@ -7,7 +7,7 @@ use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Media\Builder\MediaBuilder;
 use CanalTP\MediaManager\Category\Line;
 
-$array = array(
+$params = array(
     'company' => array(
     'storage' => array(
         'type' => 'filesystem',
@@ -22,10 +22,8 @@ $configurationBuilder = new ConfigurationBuilder();
 $mediaBuilder = new MediaBuilder();
 $category = new Line();
 
-$configurationBuilder->buildConfiguration($array);
-
 $company->setName("My_Company");
-$company->setConfiguration($configurationBuilder->getConfiguration());
+$company->setConfiguration($configurationBuilder->buildConfiguration($params));
 
 $media = $mediaBuilder->buildMedia(
     '../tests/data/CanalTP/sound/jingle_SNCF.mp3',

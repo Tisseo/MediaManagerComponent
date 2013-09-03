@@ -31,14 +31,10 @@ class ConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetConfiguration()
     {
-        $this->assertNull(
-            $this->builder->getConfiguration(),
-            Registry::get('NOT_INIT')
-        );
-        $this->builder->buildConfiguration($this->params);
+        $configuration = $this->builder->buildConfiguration($this->params);
         $this->assertInstanceOf(
             Registry::get('CONFIGURATION_INTERFACE'),
-            $this->builder->getConfiguration(),
+            $configuration,
             Registry::get('BAD_RETURN')
         );
     }
