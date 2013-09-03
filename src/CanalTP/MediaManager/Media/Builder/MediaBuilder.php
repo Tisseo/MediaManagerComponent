@@ -11,6 +11,11 @@ class MediaBuilder implements MediaBuilderInterface
 {
     private $media = null;
 
+    private function getMedia()
+    {
+        return ($this->media);
+    }
+
     public function buildMedia(
         $file,
         CompanyInterface $company,
@@ -23,10 +28,6 @@ class MediaBuilder implements MediaBuilderInterface
         $this->media->setPath($file);
         $this->media->setCompany($company);
         $this->media->setCategory($category);
-    }
-
-    public function getMedia()
-    {
-        return ($this->media);
+        return ($this->getMedia());
     }
 }
