@@ -123,9 +123,8 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
             ),
         );
         $configBuilder = new ConfigurationBuilder();
-        $configBuilder->buildConfiguration($params);
-        $company = new Company($configBuilder->getConfiguration());
-        $company->setConfiguration($configBuilder->getConfiguration());
+        $company = new Company();
+        $company->setConfiguration($configBuilder->buildConfiguration($params));
         $this->assertNull(
             $this->stub->getCompany(),
             Registry::get('NOT_INIT')

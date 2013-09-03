@@ -25,9 +25,8 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
         $this->company = new Company();
         $this->configBuilder = new ConfigurationBuilder();
 
-        $this->configBuilder->buildConfiguration($params);
         $this->company->setConfiguration(
-            $this->configBuilder->getConfiguration()
+            $this->configBuilder->buildConfiguration($params)
         );
     }
 
