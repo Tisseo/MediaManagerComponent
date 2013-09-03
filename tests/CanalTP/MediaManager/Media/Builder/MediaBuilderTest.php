@@ -46,10 +46,6 @@ class MediaBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetMedia()
     {
-        $this->assertNull(
-            $this->builder->getMedia(),
-            Registry::get('NOT_INIT')
-        );
         $media = $this->builder->buildMedia(
             $this->mediaPath,
             $this->company,
@@ -57,7 +53,7 @@ class MediaBuilderTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertInstanceOf(
             Registry::get('MEDIA_INTERFACE'),
-            $this->builder->getMedia(),
+            $media,
             Registry::get('BAD_RETURN')
         );
     }

@@ -12,5 +12,4 @@ interface MediaBuilderInterface
         CompanyInterface $company,
         CategoryInterface $category
         );
-    public function getMedia();
 }

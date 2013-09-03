@@ -20,17 +20,17 @@ $array = array(
 $company = new Company();
 $configurationBuilder = new ConfigurationBuilder();
 $mediaBuilder = new MediaBuilder();
+$category = new Line();
 
 $configurationBuilder->buildConfiguration($array);
 
 $company->setName("My_Company");
 $company->setConfiguration($configurationBuilder->getConfiguration());
 
-$mediaBuilder->buildMedia(
+$media = $mediaBuilder->buildMedia(
     '../tests/data/CanalTP/sound/jingle_SNCF.mp3',
     $company,
-    new Line()
+    $category
 );
-$media = $mediaBuilder->getMedia();
 
 $company->getStorage()->addMedia($media, $company->getStrategy());
