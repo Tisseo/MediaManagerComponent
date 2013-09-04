@@ -7,9 +7,6 @@ use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
 use CanalTP\MediaManager\Media\Factory\MediaFactory;
 use CanalTP\MediaManager\Company\Company;
-// use CanalTP\MediaManager\Company\Configuration\Configuration;
-// use CanalTP\MediaManager\Strategy\DefaultStrategy;
-// use CanalTP\MediaManager\Storage\FileSystem;
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
