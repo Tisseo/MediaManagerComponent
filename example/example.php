@@ -31,4 +31,4 @@ $media = $mediaBuilder->buildMedia(
     $category
 );
 
-$company->getStorage()->addMedia($media, $company->getStrategy());
+$company->addMedia($media);
