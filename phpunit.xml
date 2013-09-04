@@ -28,6 +28,6 @@
     </filter>
 
     <logging>
-         <log type="coverage-html" target="./log/CodeCoverage" charset="UTF-8" yui="true" highlight="true" lowUpperBound="50" highLowerBound="80"/>
+         <log type="coverage-html" target="./docs/CodeCoverage" charset="UTF-8" yui="true" highlight="true" lowUpperBound="50" highLowerBound="80"/>
      </logging>
 </phpunit>
