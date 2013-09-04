@@ -29,7 +29,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
                     'path' => '/tmp/MediaManager/',
                 ),
                 'strategy' => 'default'
-            ),
+            )
         );
         $this->company = new Company();
         $this->company->setName('my_company');

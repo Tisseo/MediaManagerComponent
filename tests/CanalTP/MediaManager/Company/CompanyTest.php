@@ -20,7 +20,7 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
                     'path' => '/tmp/MediaManager/',
                 ),
                 'strategy' => 'default'
-            ),
+            )
         );
         $this->company = new Company();
         $this->configBuilder = new ConfigurationBuilder();

@@ -14,7 +14,7 @@ $params = array(
         'path' => __DIR__ . '/my_storage/',
     ),
     'strategy' => 'default'
-    ),
+    )
 );
 
 $company = new Company();

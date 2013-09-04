@@ -24,7 +24,7 @@ class MediaBuilderTest extends \PHPUnit_Framework_TestCase
                     'path' => '/tmp/MediaManager/',
                 ),
                 'strategy' => 'default'
-            ),
+            )
         );
         $this->mediaPath = Registry::get('/') . Registry::get('SOUND_TEST');
         $configBuilder = new ConfigurationBuilder();
