@@ -3,6 +3,7 @@
 namespace CanalTP\MediaManager\Company;
 
 use CanalTP\MediaManager\Company\CompanyInterface;
+use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Company\Configuration\ConfigurationInterface;
 
 class Company implements CompanyInterface
@@ -15,16 +16,6 @@ class Company implements CompanyInterface
         $this->name = 'Unknown';
     }
 
-    public function setConfiguration(ConfigurationInterface $config)
-    {
-        $this->configuration = $config;
-    }
-
-    public function getConfiguration()
-    {
-        return ($this->configuration);
-    }
-
     public function getStorage()
     {
         return ($this->configuration->getStorage());
@@ -35,6 +26,16 @@ class Company implements CompanyInterface
         return ($this->configuration->getStrategy());
     }
 
+    public function setConfiguration(ConfigurationInterface $config)
+    {
+        $this->configuration = $config;
+    }
+
+    public function getConfiguration()
+    {
+        return ($this->configuration);
+    }
+
     public function getName()
     {
         return ($this->name);
@@ -43,5 +44,10 @@ class Company implements CompanyInterface
     public function setName($newName)
     {
         $this->name = $newName;
+    }
+
+    public function addMedia(MediaInterface $media)
+    {
+        return ($this->getStorage()->addMedia($media, $this->getStrategy()));
     }
 }

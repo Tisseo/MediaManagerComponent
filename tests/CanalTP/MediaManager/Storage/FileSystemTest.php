@@ -3,11 +3,13 @@
 namespace CanalTP\MediaManager\Test\Storage;
 
 use CanalTP\MediaManager\Registry;
-use CanalTP\MediaManager\Company\Company;
+use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
-use CanalTP\MediaManager\Strategy\DefaultStrategy;
 use CanalTP\MediaManager\Media\Factory\MediaFactory;
-use CanalTP\MediaManager\Storage\FileSystem;
+use CanalTP\MediaManager\Company\Company;
+// use CanalTP\MediaManager\Company\Configuration\Configuration;
+// use CanalTP\MediaManager\Strategy\DefaultStrategy;
+// use CanalTP\MediaManager\Storage\FileSystem;
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,16 +22,26 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $factory = new MediaFactory();
+        $params = array(
+            'company' => array(
+                'storage' => array(
+                    'type' => 'filesystem',
+                    'path' => '/tmp/MediaManager/',
+                ),
+                'strategy' => 'default'
+            ),
+        );
         $this->company = new Company();
-        $this->company->setConfiguration(new Configuration());
-        $this->company->setName('My Company');
-        $this->strategy = new DefaultStrategy();
-        $this->storage = new FileSystem();
+        $this->company->setName('my_company');
+        $this->configBuilder = new ConfigurationBuilder();
+
+        $this->company->setConfiguration(
+            $this->configBuilder->buildConfiguration($params)
+        );
         $this->filePath = Registry::get('/') . Registry::get('SOUND_TEST');
         $this->media = $factory->create($this->filePath);
         $this->media->setPath($this->filePath);
         $this->media->setCompany($this->company);
-        $this->storage->setPath(Registry::get('TMP_DIR'));
 
         $this->assertTrue(
             file_exists($this->filePath),
@@ -40,7 +52,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
     public function testAddMedia()
     {
         $this->assertTrue(
-            $this->storage->addMedia($this->media, $this->strategy),
+            $this->company->addMedia($this->media),
             Registry::get('STORAGE_MOVE')
         );
         $this->assertFalse(
@@ -52,7 +64,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         rename($this->media->getPath(), $this->filePath);
-        rmdir(Registry::get('TMP_DIR') . $this->company->getName());
-        rmdir(Registry::get('TMP_DIR'));
+        rmdir(dirname($this->media->getPath()));
+        rmdir($this->company->getStorage()->getPath());
     }
 }
