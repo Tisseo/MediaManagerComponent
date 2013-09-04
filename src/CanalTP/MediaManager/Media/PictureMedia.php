@@ -7,35 +7,35 @@ use CanalTP\MediaManager\Media\AbstractMedia;
 
 class PictureMedia extends AbstractMedia
 {
-    private $sizeX = null;
-    private $sizeY = null;
+    private $width = null;
+    private $length = null;
 
     public function __construct()
     {
         parent::__construct();
 
         $this->type = PictureMediaType::UNKNOWN;
-        $this->sizeX = 0;
-        $this->sizeY = 0;
+        $this->width = 0;
+        $this->length = 0;
     }
 
-    public function getSizeX()
+    public function getWidth()
     {
-        return ($this->sizeX);
+        return ($this->width);
     }
 
-    public function setSizeX($sizeX)
+    public function setWidth($width)
     {
-        $this->sizeX = $sizeX;
+        $this->width = $width;
     }
 
-    public function getSizeY()
+    public function getLength()
     {
-        return ($this->sizeY);
+        return ($this->length);
     }
 
-    public function setSizeY($sizeY)
+    public function setLength($length)
     {
-        $this->sizeY = $sizeY;
+        $this->length = $length;
     }
 }
