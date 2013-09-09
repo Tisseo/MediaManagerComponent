@@ -19,7 +19,7 @@ class ConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
                     'path' => '/tmp/MediaManager/',
                 ),
                 'strategy' => 'default'
-            ),
+            )
         );
         $this->builder = new ConfigurationBuilder();
     }

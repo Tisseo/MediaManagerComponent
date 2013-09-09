@@ -14,7 +14,7 @@ $params = array(
         'path' => __DIR__ . '/my_storage/',
     ),
     'strategy' => 'default'
-    ),
+    )
 );
 
 $company = new Company();
@@ -31,4 +31,4 @@ $media = $mediaBuilder->buildMedia(
     $category
 );
 
-$company->getStorage()->addMedia($media, $company->getStrategy());
+$company->addMedia($media);

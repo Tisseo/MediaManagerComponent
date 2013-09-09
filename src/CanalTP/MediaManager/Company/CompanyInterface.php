@@ -2,6 +2,7 @@
 
 namespace CanalTP\MediaManager\Company;
 
+use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Company\Configuration\ConfigurationInterface;
 
 interface CompanyInterface
@@ -11,4 +12,5 @@ interface CompanyInterface
     public function getConfiguration();
     public function getStorage();
     public function getStrategy();
+    public function addMedia(MediaInterface $media);
 }

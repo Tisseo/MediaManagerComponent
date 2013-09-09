@@ -10,11 +10,6 @@ abstract class AbstractStorage implements StorageInterface
 {
     private $path = null;
 
-    abstract public function addMedia(
-        MediaInterface $media,
-        StrategyInterface $strategy
-        );
-
     public function __construct()
     {
         $this->path = '';
