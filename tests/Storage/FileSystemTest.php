@@ -7,18 +7,19 @@ use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
 use CanalTP\MediaManager\Media\Factory\MediaFactory;
 use CanalTP\MediaManager\Company\Company;
+use CanalTP\MediaManager\Category\Line;
+use CanalTP\MediaManager\Media\Builder\MediaBuilder;
+
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
-    private $storage = null;
-    private $strategy = null;
     private $media = null;
     private $company = null;
     private $filePath = null;
 
     public function setUp()
     {
-        $factory = new MediaFactory();
+        $mediaBuilder = new MediaBuilder();
         $params = array(
             'company' => array(
                 'storage' => array(
@@ -28,6 +29,8 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
                 'strategy' => 'default'
             )
         );
+        $category = new Line();
+        $category->setName(Registry::get('CATEGORY_NAME'));
         $this->company = new Company();
         $this->company->setName('my_company');
         $this->configBuilder = new ConfigurationBuilder();
@@ -35,10 +38,12 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
         $this->company->setConfiguration(
             $this->configBuilder->buildConfiguration($params)
         );
-        $this->filePath = Registry::get('/') . Registry::get('SOUND_TEST');
-        $this->media = $factory->create($this->filePath);
-        $this->media->setPath($this->filePath);
-        $this->media->setCompany($this->company);
+        $this->filePath = Registry::get('/') . Registry::get('SOUND_FILE');
+        $this->media = $mediaBuilder->buildMedia(
+            $this->filePath,
+            $this->company,
+            $category
+        );
 
         $this->assertTrue(
             file_exists($this->filePath),
@@ -60,8 +65,11 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
+        $path = $this->company->getStorage()->getPath();
+
         rename($this->media->getPath(), $this->filePath);
         rmdir(dirname($this->media->getPath()));
-        rmdir($this->company->getStorage()->getPath());
+        rmdir($path . Registry::get('COMPANY_NAME'));
+        rmdir($path);
     }
 }

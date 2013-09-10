@@ -14,10 +14,8 @@ class FileSystem extends AbstractStorage
         ) {
         $result = false;
         $path = $this->getPath();
-        $path .= $strategy->generatePath(
-            $media->getPath(),
-            $media->getCompany()->getName()
-        );
+        $path .= $strategy->generatePath($media);
+
         if (!is_dir(dirname($path))) {
             mkdir(dirname($path), 0777, true);
         }

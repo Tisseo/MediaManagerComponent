@@ -7,8 +7,12 @@ use CanalTP\MediaManager\Strategy\AbstractStrategy;
 
 class DefaultStrategy extends AbstractStrategy
 {
-    public function generatePath($path, $companyName)
+    public function generatePath($media)
     {
-        return ($companyName.'/'.basename($path));
+        $path = $media->getCompany()->getName() . '/';
+        $path .= $media->getCategory()->getName() . '/';
+        $path .= $media->getBaseName();
+
+        return ($path);
     }
 }

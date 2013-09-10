@@ -21,12 +21,12 @@ class PictureTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(
             'CanalTP\MediaManager\Media\SoundMedia',
-            $this->factory->create($baseDir . Registry::get('SOUND_TEST')),
+            $this->factory->create($baseDir . Registry::get('SOUND_FILE')),
             Registry::get('FACTORY_CREATE')
         );
         $this->assertInstanceOf(
             'CanalTP\MediaManager\Media\PictureMedia',
-            $this->factory->create($baseDir . Registry::get('PICTURE_TEST')),
+            $this->factory->create($baseDir . Registry::get('PICTURE_FILE')),
             Registry::get('FACTORY_CREATE')
         );
     }

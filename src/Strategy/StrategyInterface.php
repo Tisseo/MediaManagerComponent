@@ -4,5 +4,5 @@ namespace CanalTP\MediaManager\Strategy;
 
 interface StrategyInterface
 {
-    public function generatePath($path, $companyName);
+    public function generatePath($media);
 }
