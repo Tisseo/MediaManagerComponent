@@ -13,6 +13,5 @@
     "autoload": {
         "classmap": [ "src/" ]
     },
-    "target-dir": "CanalTP/MediaManager",
     "minimum-stability": "dev"
 }
