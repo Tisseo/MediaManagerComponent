@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__.'/../vendor/autoload.php';
-require_once __DIR__.'/../src/CanalTP/MediaManager/Registry.php';
+require_once __DIR__.'/../src/Registry.php';
 
 use CanalTP\MediaManager\Registry;
 
