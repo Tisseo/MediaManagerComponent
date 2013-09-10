@@ -10,12 +10,9 @@
             "email": "remy.abikhalil@canaltp.fr"
         }
     ],
-    "require": {
-        "php": ">=5.3.3"
-    },
     "autoload": {
-        "psr-0": { "CanalTP\\MediaManager": "src/" }
+        "classmap": [ "src/" ]
     },
-    "target-dir": "CanalTP/Component",
+    "target-dir": "CanalTP/MediaManager",
     "minimum-stability": "dev"
 }
