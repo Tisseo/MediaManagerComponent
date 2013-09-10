@@ -7,6 +7,12 @@ use CanalTP\MediaManager\Company\CompanyInterface;
 
 interface MediaInterface
 {
+    public function getFileName();
+    public function setFileName($fileName);
+
+    public function getBaseName();
+    public function setBaseName($baseName);
+
     public function getMediaType();
     public function setMediaType($type);
 

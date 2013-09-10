@@ -4,6 +4,7 @@ namespace CanalTP\MediaManager\Media;
 
 use CanalTP\MediaManager\Media\PictureMediaType;
 use CanalTP\MediaManager\Media\AbstractMedia;
+use CanalTP\MediaManager\Media\MediaType;
 
 class PictureMedia extends AbstractMedia
 {
@@ -14,6 +15,7 @@ class PictureMedia extends AbstractMedia
     {
         parent::__construct();
 
+        $this->mediaType = MediaType::PICTURE;
         $this->type = PictureMediaType::UNKNOWN;
         $this->width = 0;
         $this->length = 0;

@@ -41,6 +41,38 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testSetAndGetFileName()
+    {
+        $fileName = $this->stub->getFileName();
+
+        $this->assertInternalType('string', $fileName);
+        $this->assertEquals(
+            $fileName, Registry::get('UNKNOWN'),
+            Registry::get('NOT_INIT')
+        );
+        $this->stub->setFileName(Registry::get('FILENAME_TEST'));
+        $this->assertEquals(
+            $this->stub->getFileName(), Registry::get('FILENAME_TEST'),
+            Registry::get('NOT_SET')
+        );
+    }
+
+    public function testSetAndGetBaseName()
+    {
+        $baseName = $this->stub->getBaseName();
+
+        $this->assertInternalType('string', $baseName);
+        $this->assertEquals(
+            $baseName, Registry::get('UNKNOWN'),
+            Registry::get('NOT_INIT')
+        );
+        $this->stub->setBaseName(Registry::get('BASENAME_TEST'));
+        $this->assertEquals(
+            $this->stub->getBaseName(), Registry::get('BASENAME_TEST'),
+            Registry::get('NOT_SET')
+        );
+    }
+
     public function testSetAndGetType()
     {
         $type = $this->stub->getType();
@@ -152,6 +184,22 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
         $this->stub->setCategory($category);
         $this->assertEquals(
             $this->stub->getCategory(), $category,
+            Registry::get('NOT_SET')
+        );
+    }
+
+    public function testSetAndGetExtension()
+    {
+        $extension = $this->stub->getExtension();
+
+        $this->assertInternalType('string', $extension);
+        $this->assertEquals(
+            $extension, Registry::get('UNKNOWN'),
+            Registry::get('NOT_INIT')
+        );
+        $this->stub->setExtension(Registry::get('EXTENSION_TEST'));
+        $this->assertEquals(
+            $this->stub->getExtension(), Registry::get('EXTENSION_TEST'),
             Registry::get('NOT_SET')
         );
     }

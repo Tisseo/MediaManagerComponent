@@ -22,9 +22,10 @@ class SoundMediaTest extends \PHPUnit_Framework_TestCase
             'integer', $this->sound->getMediaType(),
             Registry::get('NOT_CORRECT')
         );
+
         $this->assertEquals(
             $this->sound->getMediaType(),
-            MediaType::UNKNOWN, Registry::get('NOT_CORRECT')
+            MediaType::SOUND, Registry::get('NOT_CORRECT')
         );
         $this->assertInternalType(
             'integer', $this->sound->getType(),

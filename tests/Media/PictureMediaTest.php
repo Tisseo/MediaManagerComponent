@@ -23,7 +23,7 @@ class PictureMediaTest extends \PHPUnit_Framework_TestCase
             Registry::get('NOT_CORRECT')
         );
         $this->assertEquals(
-            $this->picture->getMediaType(), MediaType::UNKNOWN,
+            $this->picture->getMediaType(), MediaType::PICTURE,
             Registry::get('NOT_CORRECT')
         );
         $this->assertInternalType(

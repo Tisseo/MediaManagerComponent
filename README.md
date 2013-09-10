@@ -11,7 +11,7 @@ MediaManager is a PHP component to manage all media in a project.
 Requirements
 -------------
 
-1. PHP: >=5.3.3 - MediaManager use PHP 5.3.3 or more recent.
+__nothing__
 
 Installation
 -------------
@@ -93,6 +93,7 @@ You can use simple.php in example folder (example/simple.php)
     $category = new Line();
 
     $company->setName("My_Company");
+    $category->setName("My_Category");
     $company->setConfiguration($configurationBuilder->buildConfiguration($params));
 
     $media = $mediaBuilder->buildMedia(

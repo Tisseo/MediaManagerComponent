@@ -11,6 +11,9 @@ abstract class AbstractMedia implements MediaInterface
 {
     protected $company = null;
     protected $category = null;
+    protected $fileName = null;
+    protected $baseName = null;
+    protected $extension = null;
     protected $type = 0;
     protected $mediaType = null;
     protected $size = null;
@@ -19,8 +22,32 @@ abstract class AbstractMedia implements MediaInterface
 
     public function __construct()
     {
+        $this->fileName = 'Unknown';
+        $this->baseName = 'Unknown';
+        $this->extension = 'Unknown';
         $this->mediaType = MediaType::UNKNOWN;
         $this->size = 0;
+    }
+
+    public function getFileName()
+    {
+        return ($this->fileName);
+    }
+
+    public function setFileName($fileName)
+    {
+        $this->fileName = $fileName;
+    }
+
+    public function getBaseName()
+    {
+        return ($this->baseName);
+    }
+
+    public function setBaseName($baseName)
+    {
+        $this->baseName = $baseName;
+        $this->setExtension(pathinfo($baseName, PATHINFO_EXTENSION));
     }
 
     public function getType()
@@ -51,6 +78,16 @@ abstract class AbstractMedia implements MediaInterface
     public function setSize($size)
     {
         $this->size = $size;
+    }
+
+    public function getExtension()
+    {
+        return ($this->extension);
+    }
+
+    public function setExtension($extension)
+    {
+        $this->extension = $extension;
     }
 
     public function getExpirationDate()

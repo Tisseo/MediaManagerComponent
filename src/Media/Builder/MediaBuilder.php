@@ -25,6 +25,9 @@ class MediaBuilder implements MediaBuilderInterface
         $mediaFactory = new MediaFactory();
         $this->media = $mediaFactory->create($file);
 
+        $this->media->setFileName(pathinfo($file, PATHINFO_FILENAME));
+        $this->media->setBaseName(pathinfo($file, PATHINFO_BASENAME));
+        $this->media->setSize(filesize($file));
         $this->media->setPath($file);
         $this->media->setCompany($company);
         $this->media->setCategory($category);

@@ -23,7 +23,9 @@ $configurationBuilder = new ConfigurationBuilder();
 $mediaBuilder = new MediaBuilder();
 $category = new Line();
 
-$company->setName("My_Company");
+$company->setName('My_Company');
+$category->setName('My_Category');
+
 $company->setConfiguration($configurationBuilder->buildConfiguration($params));
 
 $media = $mediaBuilder->buildMedia(
@@ -33,3 +35,15 @@ $media = $mediaBuilder->buildMedia(
 );
 
 $company->addMedia($media);
+
+echo "\n######### " . $media->getFileName() . " ############\n\n";
+echo "Path: " . $media->getPath() . "\n";
+echo "BaseName: " . $media->getBaseName() . "\n";
+echo "FileName: " . $media->getFileName() . "\n";
+echo "Size: " . $media->getSize() . "\n";
+echo "Type: " . $media->getType() . "\n";
+echo "Extension: " . $media->getExtension() . "\n";
+echo "MediaType: " . $media->getMediaType() . "\n";
+echo "Company: " . $media->getCompany()->getName() . "\n";
+echo "Category: " . $media->getCategory()->getName() . "\n";
+echo "\n############################################\n\n";
