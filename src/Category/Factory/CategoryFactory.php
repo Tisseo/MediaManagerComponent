@@ -8,7 +8,6 @@ use CanalTP\MediaManager\Category\LineCategory;
 use CanalTP\MediaManager\Category\LogoCategory;
 use CanalTP\MediaManager\Category\NetworkCategory;
 
-
 class CategoryFactory implements CategoryFactoryInterface
 {
     private function product($type)
