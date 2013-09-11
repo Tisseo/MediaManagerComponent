@@ -55,6 +55,11 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
             $this->stub->getFileName(), Registry::get('FILE_NAME'),
             Registry::get('NOT_SET')
         );
+        $this->assertEquals(
+            $this->stub->getBaseName(),
+            Registry::get('FILE_NAME') . '.' . Registry::get('UNKNOWN'),
+            Registry::get('NOT_SET')
+        );
     }
 
     public function testSetAndGetBaseName()
@@ -63,12 +68,17 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('string', $baseName);
         $this->assertEquals(
-            $baseName, Registry::get('UNKNOWN'),
+            $baseName, Registry::get('UNKNOWN').'.'.Registry::get('UNKNOWN'),
             Registry::get('NOT_INIT')
         );
         $this->stub->setBaseName(Registry::get('BASE_NAME'));
         $this->assertEquals(
             $this->stub->getBaseName(), Registry::get('BASE_NAME'),
+            Registry::get('NOT_SET')
+        );
+        $this->assertEquals(
+            $this->stub->getFileName(),
+            pathinfo(Registry::get('BASE_NAME'), PATHINFO_FILENAME),
             Registry::get('NOT_SET')
         );
     }

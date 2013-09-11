@@ -12,7 +12,6 @@ abstract class AbstractMedia implements MediaInterface
     protected $company = null;
     protected $category = null;
     protected $fileName = null;
-    protected $baseName = null;
     protected $extension = null;
     protected $type = 0;
     protected $mediaType = null;
@@ -41,12 +40,12 @@ abstract class AbstractMedia implements MediaInterface
 
     public function getBaseName()
     {
-        return ($this->baseName);
+        return ($this->fileName . '.' . $this->extension);
     }
 
     public function setBaseName($baseName)
     {
-        $this->baseName = $baseName;
+        $this->setFileName(pathinfo($baseName, PATHINFO_FILENAME));
         $this->setExtension(pathinfo($baseName, PATHINFO_EXTENSION));
     }
 
