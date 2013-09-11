@@ -75,7 +75,8 @@ You can use simple.php in example folder (example/simple.php)
     use CanalTP\MediaManager\Company\Company;
     use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
     use CanalTP\MediaManager\Media\Builder\MediaBuilder;
-    use CanalTP\MediaManager\Category\Line;
+    use CanalTP\MediaManager\Category\CategoryType;
+    use CanalTP\MediaManager\Category\Factory\CategoryFactory;
 
     $params = array(
         'company' => array(
@@ -90,11 +91,13 @@ You can use simple.php in example folder (example/simple.php)
     $company = new Company();
     $configurationBuilder = new ConfigurationBuilder();
     $mediaBuilder = new MediaBuilder();
-    $category = new Line();
+    $categoryFactory = new CategoryFactory();
 
-    $company->setName("My_Company");
-    $category->setName("My_Category");
     $company->setConfiguration($configurationBuilder->buildConfiguration($params));
+    $company->setName('My_Company');
+
+    $category = $categoryFactory->create(CategoryType::LINE);
+    $category->setName('My_LineCategory');
 
     $media = $mediaBuilder->buildMedia(
         '../tests/data/CanalTP/sound/jingle_SNCF.mp3',

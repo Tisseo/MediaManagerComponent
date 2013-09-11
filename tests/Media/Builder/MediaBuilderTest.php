@@ -4,7 +4,7 @@ namespace CanalTP\MediaManager\Test\Media\Builder;
 
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Media\Builder\MediaBuilder;
-use CanalTP\MediaManager\Category\Line;
+use CanalTP\MediaManager\Category\LineCategory;
 use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 
@@ -33,7 +33,7 @@ class MediaBuilderTest extends \PHPUnit_Framework_TestCase
         $this->company->setConfiguration(
             $configBuilder->buildConfiguration($params)
         );
-        $this->category = new Line();
+        $this->category = new LineCategory();
     }
 
     public function testBuildMedia()

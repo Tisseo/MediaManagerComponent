@@ -7,7 +7,7 @@ use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
 use CanalTP\MediaManager\Media\Factory\MediaFactory;
 use CanalTP\MediaManager\Company\Company;
-use CanalTP\MediaManager\Category\Line;
+use CanalTP\MediaManager\Category\LineCategory;
 use CanalTP\MediaManager\Media\Builder\MediaBuilder;
 
 class FileSystemTest extends \PHPUnit_Framework_TestCase
@@ -28,7 +28,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
                 'strategy' => 'default'
             )
         );
-        $category = new Line();
+        $category = new LineCategory();
         $category->setName(Registry::get('CATEGORY_NAME'));
         $this->company = new Company();
         $this->company->setName('my_company');

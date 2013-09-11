@@ -3,7 +3,7 @@
 namespace CanalTP\MediaManager\Test\Category;
 
 use CanalTP\MediaManager\Registry;
-use CanalTP\MediaManager\Category\Line;
+use CanalTP\MediaManager\Category\LineCategory;
 
 class LineTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,7 +11,7 @@ class LineTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->line = new Line();
+        $this->line = new LineCategory();
     }
 
     public function testInitialisation()

@@ -6,7 +6,8 @@ require __DIR__.'/../vendor/autoload.php';
 use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Media\Builder\MediaBuilder;
-use CanalTP\MediaManager\Category\Line;
+use CanalTP\MediaManager\Category\CategoryType;
+use CanalTP\MediaManager\Category\Factory\CategoryFactory;
 
 $params = array(
     'company' => array(
@@ -21,12 +22,13 @@ $params = array(
 $company = new Company();
 $configurationBuilder = new ConfigurationBuilder();
 $mediaBuilder = new MediaBuilder();
-$category = new Line();
-
-$company->setName('My_Company');
-$category->setName('My_Category');
+$categoryFactory = new CategoryFactory();
 
 $company->setConfiguration($configurationBuilder->buildConfiguration($params));
+$company->setName('My_Company');
+
+$category = $categoryFactory->create(CategoryType::LINE);
+$category->setName('My_LineCategory');
 
 $media = $mediaBuilder->buildMedia(
     '../tests/data/CanalTP/sound/jingle_SNCF.mp3',

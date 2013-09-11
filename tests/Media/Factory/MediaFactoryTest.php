@@ -6,7 +6,7 @@ use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Media\MediaType;
 use CanalTP\MediaManager\Media\Factory\MediaFactory;
 
-class PictureTest extends \PHPUnit_Framework_TestCase
+class MediaFactoryTest extends \PHPUnit_Framework_TestCase
 {
     private $factory;
 

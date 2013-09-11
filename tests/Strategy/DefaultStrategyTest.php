@@ -6,7 +6,7 @@ use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Strategy\DefaultStrategy;
 use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Media\Builder\MediaBuilder;
-use CanalTP\MediaManager\Category\Line;
+use CanalTP\MediaManager\Category\LineCategory;
 
 class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,7 +17,7 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
     {
         $mediaBuilder = new MediaBuilder();
         $company = new Company();
-        $category = new Line();
+        $category = new LineCategory();
         $this->strategy = new DefaultStrategy();
 
         $company->setName(Registry::get('COMPANY_NAME'));
