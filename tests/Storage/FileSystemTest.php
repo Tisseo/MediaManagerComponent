@@ -10,7 +10,6 @@ use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Category\Line;
 use CanalTP\MediaManager\Media\Builder\MediaBuilder;
 
-
 class FileSystemTest extends \PHPUnit_Framework_TestCase
 {
     private $media = null;
