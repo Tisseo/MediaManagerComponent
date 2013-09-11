@@ -18,7 +18,7 @@ class LineTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertInternalType('string', $this->line->getName());
         $this->assertEquals(
-            $this->line->getName(), 'Unknown',
+            $this->line->getName(), Registry::get('LINE_CATEGORY_NAME'),
             Registry::get('NOT_INIT')
         );
         $this->assertInternalType('array', $this->line->getMediaArray());
@@ -32,7 +32,7 @@ class LineTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetName()
     {
         $this->assertEquals(
-            $this->line->getName(), 'Unknown',
+            $this->line->getName(), Registry::get('LINE_CATEGORY_NAME'),
             Registry::get('NOT_INIT')
         );
         $this->line->setName('Line');
