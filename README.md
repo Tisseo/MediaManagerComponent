@@ -21,6 +21,7 @@ You need composer to install the MediaManager.
 1. Open your composer.json in your project
 2. Add require "canaltp/media-manager": "dev-master"
 3. Add url of the repository, 'http://packagist.canaltp.fr'
+4. Please don't forget to set "post_max_size", "upload_max_filesize" and "max_file_uploads" options in your php.ini
 
     // composer.json
     {
