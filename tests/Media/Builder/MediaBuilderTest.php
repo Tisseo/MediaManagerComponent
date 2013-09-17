@@ -18,13 +18,12 @@ class MediaBuilderTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $params = array(
-            'company' => array(
-                'storage' => array(
-                    'type' => 'filesystem',
-                    'path' => '/tmp/MediaManager/',
-                ),
-                'strategy' => 'default'
-            )
+            'name' => 'my_company',
+            'storage' => array(
+                'type' => 'filesystem',
+                'path' => '/tmp/MediaManager/',
+            ),
+            'strategy' => 'default'
         );
         $this->mediaPath = Registry::get('/') . Registry::get('SOUND_FILE');
         $configBuilder = new ConfigurationBuilder();

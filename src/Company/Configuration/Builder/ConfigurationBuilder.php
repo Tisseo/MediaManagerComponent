@@ -16,38 +16,38 @@ class ConfigurationBuilder implements ConfigurationBuilderInterface
         return ($this->configuration);
     }
 
-    private function initFileSystemStorage($params)
+    private function initFileSystemStorage($company)
     {
         $filesystem = new FileSystem();
 
-        $filesystem->setPath($params['company']['storage']['path']);
+        $filesystem->setPath($company['storage']['path']);
         $this->configuration->setStorage($filesystem);
     }
 
-    private function initStorage($params)
+    private function initStorage($company)
     {
-        switch ($params['company']['storage']['type']) {
+        switch ($company['storage']['type']) {
             case 'filesystem':
-                $this->initFileSystemStorage($params);
+                $this->initFileSystemStorage($company);
                 break;
         }
     }
 
-    private function initStrategy($params)
+    private function initStrategy($company)
     {
-        switch ($params['company']['strategy']) {
+        switch ($company['strategy']) {
             case 'default':
                 $this->configuration->setStrategy(new DefaultStrategy());
                 break;
         }
     }
 
-    public function buildConfiguration($params)
+    public function buildConfiguration($company)
     {
         $this->configuration = new Configuration();
 
-        $this->initStorage($params);
-        $this->initStrategy($params);
+        $this->initStorage($company);
+        $this->initStrategy($company);
         return ($this->getConfiguration());
     }
 }

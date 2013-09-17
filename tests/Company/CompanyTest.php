@@ -14,13 +14,12 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $params = array(
-            'company' => array(
-                'storage' => array(
-                    'type' => 'filesystem',
-                    'path' => '/tmp/MediaManager/',
-                ),
-                'strategy' => 'default'
-            )
+            'name' => 'my_company',
+            'storage' => array(
+                'type' => 'filesystem',
+                'path' => '/tmp/MediaManager/',
+            ),
+            'strategy' => 'default'
         );
         $this->company = new Company();
         $this->configBuilder = new ConfigurationBuilder();

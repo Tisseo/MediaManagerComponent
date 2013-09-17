@@ -10,22 +10,20 @@ use CanalTP\MediaManager\Category\CategoryType;
 use CanalTP\MediaManager\Category\Factory\CategoryFactory;
 
 $params = array(
-    'company' => array(
+    'name' => 'my_company',
     'storage' => array(
         'type' => 'filesystem',
-        'path' => __DIR__ . '/my_storage/',
+        'path' => '/tmp/MediaManager/',
     ),
     'strategy' => 'default'
-    )
 );
-
 $company = new Company();
 $configurationBuilder = new ConfigurationBuilder();
 $mediaBuilder = new MediaBuilder();
 $categoryFactory = new CategoryFactory();
 
 $company->setConfiguration($configurationBuilder->buildConfiguration($params));
-$company->setName('My_Company');
+$company->setName($params['name']);
 
 $category = $categoryFactory->create(CategoryType::LINE);
 $category->setName('My_LineCategory');

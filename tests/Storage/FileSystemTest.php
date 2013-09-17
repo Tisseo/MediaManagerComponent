@@ -20,13 +20,12 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
     {
         $mediaBuilder = new MediaBuilder();
         $params = array(
-            'company' => array(
-                'storage' => array(
-                    'type' => 'filesystem',
-                    'path' => '/tmp/MediaManager/',
-                ),
-                'strategy' => 'default'
-            )
+            'name' => 'my_company',
+            'storage' => array(
+                'type' => 'filesystem',
+                'path' => '/tmp/MediaManager/',
+            ),
+            'strategy' => 'default'
         );
         $category = new LineCategory();
         $category->setName(Registry::get('CATEGORY_NAME'));

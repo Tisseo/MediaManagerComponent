@@ -156,15 +156,13 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetCompany()
     {
         $params = array(
-            'company' => array(
-                'storage' => array(
-                    'type' => 'filesystem',
-                    'path' => '/tmp/MediaManager/',
-                ),
-                'strategy' => 'default'
+            'name' => 'my_company',
+            'storage' => array(
+                'type' => 'filesystem',
+                'path' => '/tmp/MediaManager/',
             ),
-        );
-        $configBuilder = new ConfigurationBuilder();
+            'strategy' => 'default'
+        );        $configBuilder = new ConfigurationBuilder();
         $company = new Company();
         $company->setConfiguration($configBuilder->buildConfiguration($params));
         $this->assertNull(

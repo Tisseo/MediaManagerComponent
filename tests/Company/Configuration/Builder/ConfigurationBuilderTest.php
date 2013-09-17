@@ -13,13 +13,12 @@ class ConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->params = array(
-            'company' => array(
-                'storage' => array(
-                    'type' => 'filesystem',
-                    'path' => '/tmp/MediaManager/',
-                ),
-                'strategy' => 'default'
-            )
+            'name' => 'my_company',
+            'storage' => array(
+                'type' => 'filesystem',
+                'path' => '/tmp/MediaManager/',
+            ),
+            'strategy' => 'default'
         );
         $this->builder = new ConfigurationBuilder();
     }
