@@ -2,9 +2,12 @@
 
 namespace CanalTP\MediaManager\Storage;
 
-use CanalTP\MediaManager\Media\MediaInterface;
+use CanalTP\MediaManager\Company\CompanyInterface;
 use CanalTP\MediaManager\Strategy\StrategyInterface;
+use CanalTP\MediaManager\Category\CategoryInterface;
+use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Storage\AbstractStorage;
+use CanalTP\MediaManager\Media\Builder\MediaBuilder;
 
 class FileSystem extends AbstractStorage
 {
@@ -23,5 +26,25 @@ class FileSystem extends AbstractStorage
             $media->setPath($path);
         }
         return ($result);
+    }
+
+    public function getMediasByCategory(
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category
+        ) {
+        $dir = $strategy->getPathByCategory($company, $category);
+        $files = array_diff(scandir($dir), array('..', '.'));
+        $mediaBuilder = new MediaBuilder();
+
+        foreach ($files as $file) {
+            $category->addMedia($mediaBuilder->buildMedia(
+                    $dir . '/' . $file,
+                    $company,
+                    $category
+                )
+            );
+        }
+        return ($category->getMedias());
     }
 }

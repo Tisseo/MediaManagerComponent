@@ -47,3 +47,5 @@ echo "MediaType: " . $media->getMediaType() . "\n";
 echo "Company: " . $media->getCompany()->getName() . "\n";
 echo "Category: " . $media->getCategory()->getName() . "\n";
 echo "\n############################################\n\n";
+
+exit (0);

@@ -6,7 +6,7 @@ use CanalTP\MediaManager\Media\MediaInterface;
 
 interface CategoryInterface
 {
-    public function getMediaArray();
+    public function getMedias();
     public function addMedia(MediaInterface $media);
     public function getMediaNumber();
 

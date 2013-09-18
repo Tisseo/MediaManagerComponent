@@ -3,6 +3,7 @@
 namespace CanalTP\MediaManager\Company;
 
 use CanalTP\MediaManager\Media\MediaInterface;
+use CanalTP\MediaManager\Category\CategoryInterface;
 use CanalTP\MediaManager\Company\Configuration\ConfigurationInterface;
 
 interface CompanyInterface
@@ -13,4 +14,5 @@ interface CompanyInterface
     public function getStorage();
     public function getStrategy();
     public function addMedia(MediaInterface $media);
+    public function getMediasByCategory(CategoryInterface $category);
 }

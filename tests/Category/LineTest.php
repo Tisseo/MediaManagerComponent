@@ -21,7 +21,7 @@ class LineTest extends \PHPUnit_Framework_TestCase
             $this->line->getName(), Registry::get('LINE_CATEGORY_NAME'),
             Registry::get('NOT_INIT')
         );
-        $this->assertInternalType('array', $this->line->getMediaArray());
+        $this->assertInternalType('array', $this->line->getMedias());
         $this->assertInternalType('integer', $this->line->getMediaNumber());
         $this->assertEquals(
             $this->line->getMediaNumber(), 0,

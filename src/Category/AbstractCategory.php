@@ -26,7 +26,7 @@ abstract class AbstractCategory implements CategoryInterface
         $this->name = $name;
     }
 
-    public function getMediaArray()
+    public function getMedias()
     {
         return ($this->medias);
     }

@@ -20,7 +20,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
     {
         $mediaBuilder = new MediaBuilder();
         $params = array(
-            'name' => 'my_company',
+            'name' => Registry::get('COMPANY_NAME'),
             'storage' => array(
                 'type' => 'filesystem',
                 'path' => '/tmp/MediaManager/',
@@ -30,7 +30,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
         $category = new LineCategory();
         $category->setName(Registry::get('CATEGORY_NAME'));
         $this->company = new Company();
-        $this->company->setName('my_company');
+        $this->company->setName($params['name']);
         $this->configBuilder = new ConfigurationBuilder();
 
         $this->company->setConfiguration(

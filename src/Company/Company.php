@@ -3,8 +3,10 @@
 namespace CanalTP\MediaManager\Company;
 
 use CanalTP\MediaManager\Company\CompanyInterface;
+use CanalTP\MediaManager\Category\CategoryInterface;
 use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Company\Configuration\ConfigurationInterface;
+
 
 class Company implements CompanyInterface
 {
@@ -49,5 +51,15 @@ class Company implements CompanyInterface
     public function addMedia(MediaInterface $media)
     {
         return ($this->getStorage()->addMedia($media, $this->getStrategy()));
+    }
+
+    public function getMediasByCategory(CategoryInterface $category)
+    {
+        return ($this->getStorage()->getMediasByCategory(
+                $this,
+                $this->getStrategy(),
+                $category
+            )
+        );
     }
 }
