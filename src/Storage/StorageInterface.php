@@ -19,4 +19,11 @@ interface StorageInterface
         StrategyInterface $strategy,
         CategoryInterface $category
     );
+
+    public function removeMedia(
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $basename
+    );
 }

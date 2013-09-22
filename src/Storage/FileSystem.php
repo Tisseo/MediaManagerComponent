@@ -46,4 +46,21 @@ class FileSystem extends AbstractStorage
         }
         return ($category->getMedias());
     }
+
+    public function removeMedia(
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $basename
+        ) {
+        $files = $strategy->getMediasPathByCategory($company, $category);
+
+        foreach ($files as $file) {
+            if (basename($file) == $basename)
+            {
+                return (unlink($file));
+            }
+        }
+        return (false);
+    }
 }

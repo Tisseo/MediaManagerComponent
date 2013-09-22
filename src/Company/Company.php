@@ -62,4 +62,15 @@ class Company implements CompanyInterface
             )
         );
     }
+
+    public function removeMedia(CategoryInterface $category, $basename)
+    {
+        return ($this->getStorage()->removeMedia(
+                $this,
+                $this->getStrategy(),
+                $category,
+                $basename
+            )
+        );
+    }
 }

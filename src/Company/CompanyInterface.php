@@ -15,4 +15,5 @@ interface CompanyInterface
     public function getStrategy();
     public function addMedia(MediaInterface $media);
     public function getMediasByCategory(CategoryInterface $category);
+    public function removeMedia(CategoryInterface $category, $basename);
 }
