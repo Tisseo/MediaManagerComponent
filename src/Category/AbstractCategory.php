@@ -7,13 +7,27 @@ use CanalTP\MediaManager\Category\CategoryInterface;
 
 abstract class AbstractCategory implements CategoryInterface
 {
+    protected $id = null;
     protected $name = null;
     protected $medias = null;
+    protected $parent = null;
 
     public function __construct()
     {
+        $this->id = 'Unknown';
         $this->name = 'Unknown';
+        $this->parent = false;
         $this->medias = array();
+    }
+
+    public function getId()
+    {
+        return ($this->id);
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     public function getName()
@@ -24,6 +38,16 @@ abstract class AbstractCategory implements CategoryInterface
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function getParent()
+    {
+        return ($this->parent);
+    }
+
+    public function setParent($category)
+    {
+        $this->parent = $category;
     }
 
     public function getMedias()

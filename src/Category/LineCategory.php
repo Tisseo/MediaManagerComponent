@@ -10,6 +10,7 @@ class LineCategory extends AbstractCategory
     {
         parent::__construct();
 
+        $this->id = 'line';
         $this->name = 'Line';
     }
 }

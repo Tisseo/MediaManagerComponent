@@ -8,7 +8,7 @@ use CanalTP\MediaManager\Category\CategoryInterface;
 interface StrategyInterface
 {
     public function generatePath($media);
-    public function getPathByCategory(
+    public function getMediasPathByCategory(
         CompanyInterface $company,
         CategoryInterface $category
     );

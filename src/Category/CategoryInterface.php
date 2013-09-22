@@ -12,4 +12,10 @@ interface CategoryInterface
 
     public function getName();
     public function setName($name);
+
+    public function getId();
+    public function setId($id);
+
+    public function getParent();
+    public function setParent($category);
 }

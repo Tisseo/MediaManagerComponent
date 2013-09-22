@@ -10,6 +10,7 @@ class LogoCategory extends AbstractCategory
     {
         parent::__construct();
 
+        $this->id = 'logo';
         $this->name = 'Logo';
     }
 }

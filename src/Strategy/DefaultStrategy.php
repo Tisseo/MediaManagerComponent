@@ -9,12 +9,25 @@ use CanalTP\MediaManager\Strategy\AbstractStrategy;
 
 class DefaultStrategy extends AbstractStrategy
 {
+
+    private function buildPath($path, $category)
+    {
+        
+        if ($category->getParent())
+        {
+            $path .= $this->buildPath($path, $category->getParent());
+        }
+        $path .= $category->getId() . '/';
+        return ($path);
+    }
+
     public function generatePath($media)
     {
+        $category = $media->getCategory();
         $path = $media->getCompany()->getName() . '/';
-        $path .= $media->getCategory()->getName() . '/';
-        $path .= $media->getBaseName();
 
+        $path .= $this->buildPath("", $category);
+        $path .= $media->getBaseName();
         return ($path);
     }
 
@@ -38,15 +51,31 @@ class DefaultStrategy extends AbstractStrategy
         return ($path);
     }
 
-    public function getPathByCategory(
+    public function getMediasPathByCategory(
         CompanyInterface $company,
         CategoryInterface $category
     )
     {
-        return ($this->findCategory(
+        $dir = $this->findCategory(
             $company->getStorage()->getPath() . $company->getName(),
-            $category->getName()
-            )
+            $category->getId()
         );
+        $categories = array_diff(scandir($dir), array('..', '.'));
+        $medias = array();
+
+        foreach ($categories as $category) {
+            $directory = $dir . '/' . $category;
+            $files = array_diff(scandir($directory), array('..', '.'));
+
+            foreach ($files as $file) {
+                $media = $directory . '/' . $file;
+
+                if (!is_dir($media))
+                {
+                    array_push($medias, $media);
+                }
+            }
+        }
+        return ($medias);
     }
 }

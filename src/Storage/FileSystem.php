@@ -33,13 +33,12 @@ class FileSystem extends AbstractStorage
         StrategyInterface $strategy,
         CategoryInterface $category
         ) {
-        $dir = $strategy->getPathByCategory($company, $category);
-        $files = array_diff(scandir($dir), array('..', '.'));
+        $files = $strategy->getMediasPathByCategory($company, $category);
         $mediaBuilder = new MediaBuilder();
 
         foreach ($files as $file) {
             $category->addMedia($mediaBuilder->buildMedia(
-                    $dir . '/' . $file,
+                    $file,
                     $company,
                     $category
                 )

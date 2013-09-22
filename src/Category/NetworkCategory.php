@@ -10,6 +10,7 @@ class NetworkCategory extends AbstractCategory
     {
         parent::__construct();
 
+        $this->id = 'network';
         $this->name = 'Network';
     }
 }
