@@ -63,16 +63,19 @@ The strategy is use to define all informations about the manipulations
 
 #### Run exemple ####
 
-You can use simple.php in example folder (example/simple.php)
+You can use simple_upload.php in example folder (example/simple_upload.php) then
+You can run simple_listing.php (example/simple_listing.php) to list all media.
+
+
+
+#### Upload Example ####
 
     // Shell
     $> cd example
-    $> ./simple.php
+    $> ./simple_upload.php
 
 
-#### Exemple ####
-
-    // example/simple.php
+    // example/simple_upload.php
     use CanalTP\MediaManager\Company\Company;
     use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
     use CanalTP\MediaManager\Media\Builder\MediaBuilder;
@@ -80,22 +83,20 @@ You can use simple.php in example folder (example/simple.php)
     use CanalTP\MediaManager\Category\Factory\CategoryFactory;
 
     $params = array(
-        'company' => array(
+        'name' => 'my_company',
         'storage' => array(
             'type' => 'filesystem',
-            'path' => __DIR__ . '/my_storage/',
+            'path' => '/tmp/MediaManager/',
         ),
         'strategy' => 'default'
-        )
     );
-
     $company = new Company();
     $configurationBuilder = new ConfigurationBuilder();
     $mediaBuilder = new MediaBuilder();
     $categoryFactory = new CategoryFactory();
 
     $company->setConfiguration($configurationBuilder->buildConfiguration($params));
-    $company->setName('My_Company');
+    $company->setName($params['name']);
 
     $category = $categoryFactory->create(CategoryType::LINE);
     $category->setName('My_LineCategory');
@@ -107,6 +108,81 @@ You can use simple.php in example folder (example/simple.php)
     );
 
     $company->addMedia($media);
+
+    echo "\n######### " . $media->getFileName() . " ############\n\n";
+    echo "Path: " . $media->getPath() . "\n";
+    echo "BaseName: " . $media->getBaseName() . "\n";
+    echo "FileName: " . $media->getFileName() . "\n";
+    echo "Size: " . $media->getSize() . "\n";
+    echo "Type: " . $media->getType() . "\n";
+    echo "Extension: " . $media->getExtension() . "\n";
+    echo "MediaType: " . $media->getMediaType() . "\n";
+    echo "Company: " . $media->getCompany()->getName() . "\n";
+    echo "Category: " . $media->getCategory()->getName() . "\n";
+    echo "\n############################################\n\n";
+
+    exit (0);
+
+
+
+#### Listing Example ####
+
+    // Shell
+    $> cd example
+    $> ./simple_listing.php
+
+
+    // example/simple_listing.php
+    use CanalTP\MediaManager\Company\Company;
+    use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
+    use CanalTP\MediaManager\Category\CategoryType;
+    use CanalTP\MediaManager\Category\CategoryInterface;
+    use CanalTP\MediaManager\Category\Factory\CategoryFactory;
+
+    $path = '/tmp/MediaManager/my_company/My_LineCategory/jingle_SNCF.mp3';
+
+    if (!file_exists($path)) {
+        echo "Please run \"./simple_upload.php\" before.\n";
+        exit (0);
+    }
+
+    $params = array(
+        'name' => 'my_company',
+        'storage' => array(
+            'type' => 'filesystem',
+            'path' => '/tmp/MediaManager/',
+        ),
+        'strategy' => 'default'
+    );
+    $company = new Company();
+    $configurationBuilder = new ConfigurationBuilder();
+    $categoryFactory = new CategoryFactory();
+
+    $company->setConfiguration($configurationBuilder->buildConfiguration($params));
+    $company->setName($params['name']);
+
+    $category = $categoryFactory->create(CategoryType::LINE);
+    $category->setName('My_LineCategory');
+
+    $medias = $company->getMediasByCategory($category);
+
+    foreach ($medias as $media) {
+        echo "\n######### " . $media->getFileName() . " ############\n\n";
+        echo "Path: " . $media->getPath() . "\n";
+        echo "BaseName: " . $media->getBaseName() . "\n";
+        echo "FileName: " . $media->getFileName() . "\n";
+        echo "Size: " . $media->getSize() . "\n";
+        echo "Type: " . $media->getType() . "\n";
+        echo "Extension: " . $media->getExtension() . "\n";
+        echo "MediaType: " . $media->getMediaType() . "\n";
+        echo "Company: " . $media->getCompany()->getName() . "\n";
+        echo "Category: " . $media->getCategory()->getName() . "\n";
+        echo "\n############################################\n\n";
+    }
+
+    exit (0);
+
+
 
 Running MediaManager Tests
 ---------------------------
