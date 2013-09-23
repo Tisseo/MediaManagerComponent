@@ -38,11 +38,10 @@ class FileSystem extends AbstractStorage
 
         foreach ($files as $file) {
             $category->addMedia($mediaBuilder->buildMedia(
-                    $file,
-                    $company,
-                    $category
-                )
-            );
+                $file,
+                $company,
+                $category
+            ));
         }
         return ($category->getMedias());
     }
@@ -56,8 +55,7 @@ class FileSystem extends AbstractStorage
         $files = $strategy->getMediasPathByCategory($company, $category);
 
         foreach ($files as $file) {
-            if (basename($file) == $basename)
-            {
+            if (basename($file) == $basename) {
                 return (unlink($file));
             }
         }

@@ -162,7 +162,8 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
                 'path' => '/tmp/MediaManager/',
             ),
             'strategy' => 'default'
-        );        $configBuilder = new ConfigurationBuilder();
+        );
+        $configBuilder = new ConfigurationBuilder();
         $company = new Company();
         $company->setConfiguration($configBuilder->buildConfiguration($params));
         $this->assertNull(

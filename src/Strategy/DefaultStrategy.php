@@ -12,12 +12,11 @@ class DefaultStrategy extends AbstractStrategy
 
     private function buildPath($path, $category)
     {
-        
-        if ($category->getParent())
-        {
+        if ($category->getParent()) {
             $path .= $this->buildPath($path, $category->getParent());
         }
         $path .= $category->getId() . '/';
+
         return ($path);
     }
 
@@ -39,12 +38,9 @@ class DefaultStrategy extends AbstractStrategy
             $current_path = $path . '/' . $result;
             $is_dir = is_dir($current_path);
 
-            if ($is_dir && $result == $type)
-            {
+            if ($is_dir && $result == $type) {
                 return ($current_path);
-            }
-            else if ($is_dir)
-            {
+            } elseif ($is_dir) {
                 $this->findCategory($current_path, $type);
             }
         }
@@ -70,8 +66,7 @@ class DefaultStrategy extends AbstractStrategy
             foreach ($files as $file) {
                 $media = $directory . '/' . $file;
 
-                if (!is_dir($media))
-                {
+                if (!is_dir($media)) {
                     array_push($medias, $media);
                 }
             }

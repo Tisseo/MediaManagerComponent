@@ -7,7 +7,6 @@ use CanalTP\MediaManager\Category\CategoryInterface;
 use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Company\Configuration\ConfigurationInterface;
 
-
 class Company implements CompanyInterface
 {
     private $configuration = null;
