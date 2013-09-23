@@ -36,8 +36,13 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
             $configurationBuilder->buildConfiguration($params)
         );
 
+        $this->networkCategory = $categoryFactory->create(
+            CategoryType::NETWORK
+        );
         $this->category = $categoryFactory->create(CategoryType::LINE);
         $this->category->setName(Registry::get('CATEGORY_NAME'));
+        $this->category->setId(Registry::get('CATEGORY_NAME'));
+        $this->category->setParent($this->networkCategory);
 
         $this->media = $mediaBuilder->buildMedia(
             Registry::get('/') . Registry::get('SOUND_FILE'),
@@ -106,10 +111,31 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testRemoveMedia()
+    {
+        $data_path = Registry::get('/') . Registry::get('SOUND_FILE');
+        $path = $this->company->getStorage()->getPath();
+
+        copy($this->media->getPath(), $data_path);
+        $this->assertTrue(
+            $this->company->removeMedia(
+                $this->networkCategory,
+                $this->media->getBaseName()
+            )
+        );
+        $this->assertFalse(
+            $this->company->removeMedia(
+                $this->networkCategory,
+                $this->media->getBaseName()
+            )
+        );
+        rename($data_path, $this->media->getPath());
+    }
+
     public function testGetMediasByCategory()
     {
         $medias = $this->company->getMediasByCategory(
-            $this->category
+            $this->networkCategory
         );
 
         foreach ($medias as $media) {
@@ -119,7 +145,7 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
                 Registry::get('NOT_SET')
             );
         }
-        $this->assertEquals(1, $this->category->getMediaNumber());
+        $this->assertEquals(1, $this->networkCategory->getMediaNumber());
     }
 
     public function tearDown()
@@ -129,7 +155,10 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
 
         rename($this->media->getPath(), $data_path);
         rmdir(dirname($this->media->getPath()));
+        $path = $path . Registry::get('COMPANY_NAME');
+        rmdir($path . '/' . Registry::get('NETWORK_NAME'));
+        $path = $this->company->getStorage()->getPath();
         rmdir($path . Registry::get('COMPANY_NAME'));
-        rmdir($path);
+        rmdir($this->company->getStorage()->getPath());
     }
 }

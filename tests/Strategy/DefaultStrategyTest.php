@@ -23,7 +23,7 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
             'name' => Registry::get('COMPANY_NAME'),
             'storage' => array(
                 'type' => 'filesystem',
-                'path' => '/tmp/MediaManager/',
+                'path' => Registry::get('TMP_DIR'),
             ),
             'strategy' => Registry::get('STRATEGY_NAME')
         );
@@ -37,8 +37,13 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
             $configurationBuilder->buildConfiguration($params)
         );
 
+        $this->networkCategory = $categoryFactory->create(
+            CategoryType::NETWORK
+        );
         $this->category = $categoryFactory->create(CategoryType::LINE);
         $this->category->setName(Registry::get('CATEGORY_NAME'));
+        $this->category->setId(Registry::get('CATEGORY_NAME'));
+        $this->category->setParent($this->networkCategory);
 
         $this->media = $mediaBuilder->buildMedia(
             Registry::get('/') . Registry::get('SOUND_FILE'),
@@ -53,6 +58,7 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
     public function testGeneratePath()
     {
         $path = Registry::get('COMPANY_NAME') . '/';
+        $path .= Registry::get('NETWORK_NAME') . '/';
         $path .= Registry::get('CATEGORY_NAME') . '/';
         $path .= 'jingle_SNCF.mp3';
         $result = $this->company->getStrategy()->generatePath($this->media);
@@ -64,11 +70,21 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testFindCategory()
+    {
+        $this->category->setId(Registry::get('UNKNOWN'));
+        $result = $this->company->getStrategy()->getMediasPathByCategory(
+            $this->company,
+            $this->category
+        );
+
+        $this->assertEquals(count($result), 0);
+    }
 
     public function testGetMediasByCategory()
     {
         $medias = $this->company->getMediasByCategory(
-            $this->category
+            $this->networkCategory
         );
 
         foreach ($medias as $media) {
@@ -78,7 +94,8 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
                 Registry::get('NOT_SET')
             );
         }
-        $this->assertEquals(1, $this->category->getMediaNumber());
+        $this->assertEquals(1, $this->networkCategory->getMediaNumber());
+
     }
 
     public function tearDown()
@@ -88,7 +105,10 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
 
         rename($this->media->getPath(), $data_path);
         rmdir(dirname($this->media->getPath()));
+        $path = $path . Registry::get('COMPANY_NAME');
+        rmdir($path . '/' . Registry::get('NETWORK_NAME'));
+        $path = $this->company->getStorage()->getPath();
         rmdir($path . Registry::get('COMPANY_NAME'));
-        rmdir($path);
+        rmdir($this->company->getStorage()->getPath());
     }
 }

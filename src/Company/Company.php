@@ -55,7 +55,8 @@ class Company implements CompanyInterface
 
     public function getMediasByCategory(CategoryInterface $category)
     {
-        return ($this->getStorage()->getMediasByCategory(
+        return (
+            $this->getStorage()->getMediasByCategory(
                 $this,
                 $this->getStrategy(),
                 $category
@@ -65,7 +66,8 @@ class Company implements CompanyInterface
 
     public function removeMedia(CategoryInterface $category, $basename)
     {
-        return ($this->getStorage()->removeMedia(
+        return (
+            $this->getStorage()->removeMedia(
                 $this,
                 $this->getStrategy(),
                 $category,

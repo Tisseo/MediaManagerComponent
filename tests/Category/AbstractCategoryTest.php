@@ -5,6 +5,7 @@ namespace CanalTP\MediaManager\Test\Category;
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Media\Factory\MediaFactory;
 use CanalTP\MediaManager\Category\AbstractCategory;
+use CanalTP\MediaManager\Category\NetworkCategory;
 
 class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
 {
@@ -29,6 +30,27 @@ class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
         $this->stub->setName('Category');
         $this->assertEquals(
             $this->stub->getName(), 'Category',
+            Registry::get('NOT_SET')
+        );
+    }
+
+    public function testSetAndGetId()
+    {
+        $this->stub->setId('Id');
+        $this->assertEquals(
+            $this->stub->getId(), 'Id',
+            Registry::get('NOT_SET')
+        );
+    }
+
+    public function testSetAndGetParent()
+    {
+        $category = new NetworkCategory();
+
+        $this->stub->setParent($category);
+        $this->assertInstanceOf(
+            Registry::get('CATEGORY_INTERFACE'),
+            $this->stub->getParent(),
             Registry::get('NOT_SET')
         );
     }

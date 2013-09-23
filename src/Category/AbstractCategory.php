@@ -45,7 +45,7 @@ abstract class AbstractCategory implements CategoryInterface
         return ($this->parent);
     }
 
-    public function setParent($category)
+    public function setParent(CategoryInterface $category)
     {
         $this->parent = $category;
     }

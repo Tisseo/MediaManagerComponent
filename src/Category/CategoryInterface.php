@@ -17,5 +17,5 @@ interface CategoryInterface
     public function setId($id);
 
     public function getParent();
-    public function setParent($category);
+    public function setParent(CategoryInterface $category);
 }
