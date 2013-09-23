@@ -37,11 +37,13 @@ class FileSystem extends AbstractStorage
         $mediaBuilder = new MediaBuilder();
 
         foreach ($files as $file) {
-            $category->addMedia($mediaBuilder->buildMedia(
-                $file,
-                $company,
-                $category
-            ));
+            $category->addMedia(
+                $mediaBuilder->buildMedia(
+                    $file,
+                    $company,
+                    $category
+                )
+            );
         }
         return ($category->getMedias());
     }
