@@ -13,6 +13,8 @@ interface CompanyInterface
     public function getConfiguration();
     public function getStorage();
     public function getStrategy();
+    public function getName();
+    public function setName($name);
     public function addMedia(MediaInterface $media);
     public function getMediasByCategory(CategoryInterface $category);
     public function removeMedia(CategoryInterface $category, $basename);
