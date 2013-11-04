@@ -15,7 +15,7 @@ class DefaultStrategy extends AbstractStrategy
         if ($category->getParent()) {
             $path .= $this->buildPath($path, $category->getParent());
         }
-        $path .= $category->getId() . '/';
+        $path .= $category->getName() . '/';
 
         return ($path);
     }
