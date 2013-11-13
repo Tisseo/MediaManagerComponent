@@ -25,6 +25,7 @@ class FileSystem extends AbstractStorage
         if ($result = rename($media->getPath(), $path)) {
             $media->setPath($path);
         }
+
         return ($result);
     }
 
@@ -45,6 +46,7 @@ class FileSystem extends AbstractStorage
                 )
             );
         }
+
         return ($category->getMedias());
     }
 
@@ -61,6 +63,7 @@ class FileSystem extends AbstractStorage
                 return (unlink($file));
             }
         }
+
         return (false);
     }
 }

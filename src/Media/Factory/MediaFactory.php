@@ -45,6 +45,7 @@ class MediaFactory implements MediaFactoryInterface
                 $media = new PictureMedia();
                 break;
         }
+
         return ($media);
     }
 
@@ -52,6 +53,7 @@ class MediaFactory implements MediaFactoryInterface
     {
         $this->analyse($fileName);
         $this->determine();
+
         return ($this->product());
     }
 }
