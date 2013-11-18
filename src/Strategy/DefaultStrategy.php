@@ -54,13 +54,14 @@ class DefaultStrategy extends AbstractStrategy
         CategoryInterface $category
     )
     {
-        $this->findCategory(
-            $company->getStorage()->getPath() . $company->getName(),
-            $category->getId()
-        );
-        $files = array_diff(scandir($this->pathFound), array('..', '.'));
         $medias = array();
+        $path = $company->getStorage()->getPath() . $company->getName();
 
+        if (!file_exists($path)) {
+            return ($medias);
+        }
+        $this->findCategory($path, $category->getId());
+        $files = array_diff(scandir($this->pathFound), array('..', '.'));
         foreach ($files as $file) {
             $mediaPath = $this->pathFound . '/' . $file;
 
