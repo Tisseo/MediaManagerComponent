@@ -60,7 +60,7 @@ class DefaultStrategy extends AbstractStrategy
         if (!file_exists($path)) {
             return ($medias);
         }
-        $this->findCategory($path, $category->getId());
+        $this->findCategory($path, $category->getName());
         $files = array_diff(scandir($this->pathFound), array('..', '.'));
         foreach ($files as $file) {
             $mediaPath = $this->pathFound . '/' . $file;
