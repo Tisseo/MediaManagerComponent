@@ -2,13 +2,13 @@
 
 namespace CanalTP\MediaManager\Strategy;
 
-use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Company\CompanyInterface;
 use CanalTP\MediaManager\Category\CategoryInterface;
 use CanalTP\MediaManager\Strategy\AbstractStrategy;
 
 class DefaultStrategy extends AbstractStrategy
 {
+    private $pathFound = "";
 
     private function buildPath($path, $category)
     {
@@ -27,24 +27,26 @@ class DefaultStrategy extends AbstractStrategy
 
         $path .= $this->buildPath("", $category);
         $path .= $media->getBaseName();
+
         return ($path);
     }
 
-    private function findCategory($path, $type)
+    private function findCategory($path, $name)
     {
         $results = array_diff(scandir($path), array('.', '..'));
 
         foreach ($results as $result) {
+
             $current_path = $path . '/' . $result;
             $is_dir = is_dir($current_path);
 
-            if ($is_dir && $result == $type) {
-                return ($current_path);
+            if ($is_dir && $result == $name) {
+                $this->pathFound = $current_path;
+                break ;
             } elseif ($is_dir) {
-                $this->findCategory($current_path, $type);
+                $this->findCategory($current_path, $name);
             }
         }
-        return ($path);
     }
 
     public function getMediasPathByCategory(
@@ -53,30 +55,21 @@ class DefaultStrategy extends AbstractStrategy
     )
     {
         $medias = array();
-        
-        if (!file_exists($company->getStorage()->getPath())) {
+        $path = $company->getStorage()->getPath() . $company->getName();
+
+        if (!file_exists($path)) {
             return ($medias);
         }
-        
-        $dir = $this->findCategory(
-            $company->getStorage()->getPath() . $company->getName(),
-            $category->getId()
-        );
-        $categories = array_diff(scandir($dir), array('..', '.'));
-        
+        $this->findCategory($path, $category->getId());
+        $files = array_diff(scandir($this->pathFound), array('..', '.'));
+        foreach ($files as $file) {
+            $mediaPath = $this->pathFound . '/' . $file;
 
-        foreach ($categories as $category) {
-            $directory = $dir . '/' . $category;
-            $files = array_diff(scandir($directory), array('..', '.'));
-
-            foreach ($files as $file) {
-                $media = $directory . '/' . $file;
-
-                if (!is_dir($media)) {
-                    array_push($medias, $media);
-                }
+            if (!is_dir($mediaPath)) {
+                array_push($medias, $mediaPath);
             }
         }
+
         return ($medias);
     }
 }

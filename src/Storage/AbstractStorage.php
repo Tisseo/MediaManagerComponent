@@ -2,8 +2,6 @@
 
 namespace CanalTP\MediaManager\Storage;
 
-use CanalTP\MediaManager\Media\MediaInterface;
-use CanalTP\MediaManager\Strategy\StrategyInterface;
 use CanalTP\MediaManager\Storage\StorageInterface;
 
 abstract class AbstractStorage implements StorageInterface

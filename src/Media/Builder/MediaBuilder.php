@@ -31,6 +31,7 @@ class MediaBuilder implements MediaBuilderInterface
         $this->media->setPath($file);
         $this->media->setCompany($company);
         $this->media->setCategory($category);
+
         return ($this->getMedia());
     }
 }

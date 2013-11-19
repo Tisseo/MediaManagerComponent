@@ -25,6 +25,7 @@ class CategoryFactory implements CategoryFactoryInterface
                 $category = new NetworkCategory();
                 break;
         }
+
         return ($category);
     }
 
