@@ -33,6 +33,9 @@ class DefaultStrategy extends AbstractStrategy
 
     private function findCategory($path, $name)
     {
+        if (!file_exists($path)) {
+            return ;
+        }
         $results = array_diff(scandir($path), array('.', '..'));
 
         foreach ($results as $result) {
@@ -57,18 +60,19 @@ class DefaultStrategy extends AbstractStrategy
         $medias = array();
         $path = $company->getStorage()->getPath() . $company->getName();
 
-        if (!file_exists($path)) {
-            return ($medias);
-        }
         $this->findCategory($path, $category->getName());
-        $files = array_diff(scandir($this->pathFound), array('..', '.'));
-        foreach ($files as $file) {
-            $mediaPath = $this->pathFound . '/' . $file;
 
-            if (!is_dir($mediaPath)) {
-                array_push($medias, $mediaPath);
+        if ($this->pathFound != "") {
+            $files = array_diff(scandir($this->pathFound), array('..', '.'));
+            foreach ($files as $file) {
+                $mediaPath = $this->pathFound . '/' . $file;
+
+                if (!is_dir($mediaPath)) {
+                    array_push($medias, $mediaPath);
+                }
             }
         }
+        $this->pathFound = "";
 
         return ($medias);
     }
