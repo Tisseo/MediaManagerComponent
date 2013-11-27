@@ -11,10 +11,12 @@ class Company implements CompanyInterface
 {
     private $configuration = null;
     private $name = null;
+    private $id = null;
 
     public function __construct()
     {
         $this->name = 'Unknown';
+        $this->id = '0';
     }
 
     public function getStorage()
@@ -35,6 +37,16 @@ class Company implements CompanyInterface
     public function getConfiguration()
     {
         return ($this->configuration);
+    }
+
+    public function getId()
+    {
+        return ($this->id);
+    }
+
+    public function setId($newId)
+    {
+        $this->id = $newId;
     }
 
     public function getName()
@@ -59,6 +71,18 @@ class Company implements CompanyInterface
                 $this,
                 $this->getStrategy(),
                 $category
+            )
+        );
+    }
+
+    public function findMedia(CategoryInterface $category, $mediaId)
+    {
+        return (
+            $this->getStorage()->findMedia(
+                $this,
+                $this->getStrategy(),
+                $category,
+                $mediaId
             )
         );
     }

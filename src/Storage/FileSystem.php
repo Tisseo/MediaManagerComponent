@@ -50,6 +50,28 @@ class FileSystem extends AbstractStorage
         return ($category->getMedias());
     }
 
+    public function findMedia(
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $mediaId
+        ) {
+        $path = $strategy->findMedia($company, $category, $mediaId);
+        if (!$path) {
+            return (null);
+        }
+
+        $mediaBuilder = new MediaBuilder();
+
+        $media = $mediaBuilder->buildMedia(
+            $path,
+            $company,
+            $category
+        );
+
+        return ($media);
+    }
+
     public function removeMedia(
         CompanyInterface $company,
         StrategyInterface $strategy,

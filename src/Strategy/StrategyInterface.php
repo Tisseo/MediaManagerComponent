@@ -12,4 +12,9 @@ interface StrategyInterface
         CompanyInterface $company,
         CategoryInterface $category
     );
+    public function findMedia(
+        CompanyInterface $company,
+        CategoryInterface $category,
+        $mediaId
+    );
 }

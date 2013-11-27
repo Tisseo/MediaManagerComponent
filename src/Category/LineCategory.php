@@ -12,5 +12,6 @@ class LineCategory extends AbstractCategory
 
         $this->id = 'line';
         $this->name = 'Line';
+        $this->ressourceId = 'lines';
     }
 }

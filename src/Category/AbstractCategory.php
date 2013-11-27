@@ -9,6 +9,7 @@ abstract class AbstractCategory implements CategoryInterface
 {
     protected $id = null;
     protected $name = null;
+    protected $ressourceId = null;
     protected $medias = null;
     protected $parent = null;
 
@@ -16,6 +17,7 @@ abstract class AbstractCategory implements CategoryInterface
     {
         $this->id = 'Unknown';
         $this->name = 'Unknown';
+        $this->ressourceId = 'Unknown';
         $this->parent = false;
         $this->medias = array();
     }
@@ -33,6 +35,11 @@ abstract class AbstractCategory implements CategoryInterface
     public function getName()
     {
         return ($this->name);
+    }
+
+    public function getRessourceId()
+    {
+        return ($this->ressourceId);
     }
 
     public function setName($name)

@@ -76,4 +76,28 @@ class DefaultStrategy extends AbstractStrategy
 
         return ($medias);
     }
+
+    public function findMedia(
+        CompanyInterface $company,
+        CategoryInterface $category,
+        $mediaId
+    )
+    {
+        $this->findCategory(
+            $company->getStorage()->getPath() . $company->getName(),
+            $category->getId()
+        );
+        $files = array_diff(scandir($this->pathFound), array('..', '.'));
+
+        foreach ($files as $file) {
+            $mediaPath = $this->pathFound . '/' . $file;
+            $fileName = pathinfo($baseName, PATHINFO_FILENAME);
+
+            if (!is_dir($mediaPath) && $fileName == $nameId) {
+                return ($mediaPath);
+            }
+        }
+
+        return (null);
+    }
 }

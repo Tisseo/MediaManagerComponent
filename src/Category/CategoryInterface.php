@@ -16,6 +16,8 @@ interface CategoryInterface
     public function getId();
     public function setId($id);
 
+    public function getRessourceId();
+
     public function getParent();
     public function setParent(CategoryInterface $category);
 }

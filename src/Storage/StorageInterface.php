@@ -20,6 +20,13 @@ interface StorageInterface
         CategoryInterface $category
     );
 
+    public function findMedia(
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $mediaId
+    );
+
     public function removeMedia(
         CompanyInterface $company,
         StrategyInterface $strategy,

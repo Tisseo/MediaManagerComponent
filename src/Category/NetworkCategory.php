@@ -12,5 +12,6 @@ class NetworkCategory extends AbstractCategory
 
         $this->id = 'network';
         $this->name = 'Network';
+        $this->ressourceId = 'networks';
     }
 }

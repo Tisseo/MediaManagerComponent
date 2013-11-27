@@ -12,5 +12,6 @@ class LogoCategory extends AbstractCategory
 
         $this->id = 'logo';
         $this->name = 'Logo';
+        $this->ressourceId = 'logos';
     }
 }
