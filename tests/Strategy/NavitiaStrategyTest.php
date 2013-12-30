@@ -80,13 +80,6 @@ class NavitiaStrategyTest extends \PHPUnit_Framework_TestCase
             Registry::get('SOUND_FILENAME')
         );
         $this->assertEquals(count($result), 1);
-
-        // $this->company->setName('Plop');
-        // $result = $this->company->getStrategy()->getMediasPathByCategory(
-        //     $this->company,
-        //     $this->category
-        // );
-        // $this->assertEquals(count($result), 0);        
     }
 
     public function testGetMediasByCategory()
