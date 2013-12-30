@@ -119,13 +119,13 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
         copy($this->media->getPath(), $data_path);
         $this->assertTrue(
             $this->company->removeMedia(
-                $this->networkCategory,
+                $this->category,
                 $this->media->getBaseName()
             )
         );
         $this->assertFalse(
             $this->company->removeMedia(
-                $this->networkCategory,
+                $this->category,
                 $this->media->getBaseName()
             )
         );
@@ -135,7 +135,7 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
     public function testGetMediasByCategory()
     {
         $medias = $this->company->getMediasByCategory(
-            $this->networkCategory
+            $this->category
         );
 
         foreach ($medias as $media) {
@@ -145,7 +145,7 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
                 Registry::get('NOT_SET')
             );
         }
-        $this->assertEquals(1, $this->networkCategory->getMediaNumber());
+        $this->assertEquals(1, $this->category->getMediaNumber());
     }
 
     public function tearDown()

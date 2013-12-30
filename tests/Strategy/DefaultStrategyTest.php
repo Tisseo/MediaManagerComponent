@@ -84,7 +84,7 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
     public function testGetMediasByCategory()
     {
         $medias = $this->company->getMediasByCategory(
-            $this->networkCategory
+            $this->category
         );
 
         foreach ($medias as $media) {
@@ -94,8 +94,7 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
                 Registry::get('NOT_SET')
             );
         }
-        $this->assertEquals(1, $this->networkCategory->getMediaNumber());
-
+        $this->assertEquals(1, $this->category->getMediaNumber());
     }
 
     public function tearDown()
