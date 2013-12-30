@@ -72,7 +72,7 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testFindCategory()
     {
-        $this->category->setId(Registry::get('UNKNOWN'));
+        $this->category->setName(Registry::get('UNKNOWN'));
         $result = $this->company->getStrategy()->getMediasPathByCategory(
             $this->company,
             $this->category
