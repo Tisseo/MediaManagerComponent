@@ -55,6 +55,14 @@ class AbstractCategoryTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    public function testGetRessourceId()
+    {
+        $this->assertEquals(
+            $this->stub->getRessourceId(), 'Unknown',
+            Registry::get('NOT_SET')
+        );
+    }
+
     public function testAddMedia()
     {
         $sFile = Registry::get('/') . Registry::get('SOUND_FILE');

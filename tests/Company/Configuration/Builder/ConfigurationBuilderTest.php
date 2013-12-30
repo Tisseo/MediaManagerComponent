@@ -26,6 +26,9 @@ class ConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuildConfiguration()
     {
         $configuration = $this->builder->buildConfiguration($this->params);
+
+        $this->params['strategy'] = 'navitia';
+        $configuration = $this->builder->buildConfiguration($this->params);
     }
 
     public function testGetConfiguration()

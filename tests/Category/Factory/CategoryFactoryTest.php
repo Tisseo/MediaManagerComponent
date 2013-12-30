@@ -32,5 +32,10 @@ class CategoryFactoryTest extends \PHPUnit_Framework_TestCase
             $this->factory->create(CategoryType::NETWORK),
             Registry::get('FACTORY_CREATE')
         );
+        $this->assertInstanceOf(
+            'CanalTP\MediaManager\Category\ModeCategory',
+            $this->factory->create(CategoryType::MODE),
+            Registry::get('FACTORY_CREATE')
+        );
     }
 }

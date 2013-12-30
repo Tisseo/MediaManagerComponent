@@ -24,7 +24,7 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
                 'type' => 'filesystem',
                 'path' => '/tmp/MediaManager/',
             ),
-            'strategy' => Registry::get('STRATEGY_NAME')
+            'strategy' => Registry::get('DEFAULT_STRATEGY_NAME')
         );
 
         $this->company = new Company();
@@ -76,7 +76,6 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
     public function testSetAndGetName()
     {
         $company = new Company();
-
         $newName = 'My Company';
         $name = $company->getName();
 
@@ -89,6 +88,25 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $company->getName(),
             $newName,
+            Registry::get('NOT_SET')
+        );
+    }
+
+    public function testSetAndGetId()
+    {
+        $company = new Company();
+        $newId = 'My Id';
+        $id = $company->getId();
+
+        $this->assertInternalType('string', $id);
+        $this->assertEquals(
+            $id, '0',
+            Registry::get('NOT_INIT')
+        );
+        $company->setId($newId);
+        $this->assertEquals(
+            $company->getId(),
+            $newId,
             Registry::get('NOT_SET')
         );
     }
@@ -108,6 +126,22 @@ class CompanyTest extends \PHPUnit_Framework_TestCase
             Registry::get('STRATEGY_INTERFACE'),
             $this->company->getStrategy(),
             Registry::get('NOT_SET')
+        );
+    }
+
+    public function testFindMedia()
+    {
+        $this->assertNotNull(
+            $this->company->findMedia(
+                $this->category,
+                Registry::get('SOUND_FILE')
+            )
+        );
+        $this->assertNull(
+            $this->company->findMedia(
+                $this->category,
+                Registry::get('UNKNOWN')
+            )
         );
     }
 

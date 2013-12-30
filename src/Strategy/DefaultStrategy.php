@@ -91,9 +91,9 @@ class DefaultStrategy extends AbstractStrategy
 
         foreach ($files as $file) {
             $mediaPath = $this->pathFound . '/' . $file;
-            $fileName = pathinfo($baseName, PATHINFO_FILENAME);
+            $fileName = pathinfo($mediaId, PATHINFO_BASENAME);
 
-            if (!is_dir($mediaPath) && $fileName == $nameId) {
+            if (!is_dir($mediaPath) && $fileName == $file) {
                 return ($mediaPath);
             }
         }

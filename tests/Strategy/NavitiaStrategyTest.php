@@ -10,7 +10,7 @@ use CanalTP\MediaManager\Category\Factory\CategoryFactory;
 use CanalTP\MediaManager\Category\CategoryType;
 use CanalTP\MediaManager\Company\Company;
 
-class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
+class NavitiaStrategyTest extends \PHPUnit_Framework_TestCase
 {
     private $company = null;
     private $strategy = null;
@@ -25,7 +25,7 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
                 'type' => 'filesystem',
                 'path' => Registry::get('TMP_DIR'),
             ),
-            'strategy' => Registry::get('DEFAULT_STRATEGY_NAME')
+            'strategy' => Registry::get('NAVITIA_STRATEGY_NAME')
         );
 
         $this->company = new Company();
@@ -57,10 +57,11 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function testGeneratePath()
     {
-        $path = Registry::get('COMPANY_NAME') . '/';
-        $path .= Registry::get('NETWORK_NAME') . '/';
+        $path = Registry::get('SIM_RESSOURCE_NAME') . '/';
+        $path .= 0 . '/';
         $path .= Registry::get('CATEGORY_NAME') . '/';
-        $path .= 'jingle_SNCF.mp3';
+        $path .= Registry::get('SOUND_FILENAME');
+
         $result = $this->company->getStrategy()->generatePath($this->media);
 
         $this->assertInternalType('string', $result);
@@ -70,22 +71,22 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testFindCategory()
+    public function testFindMedia()
     {
         $this->category->setName(Registry::get('UNKNOWN'));
-        $result = $this->company->getStrategy()->getMediasPathByCategory(
+        $result = $this->company->getStrategy()->findMedia(
             $this->company,
-            $this->category
+            $this->category,
+            Registry::get('SOUND_FILENAME')
         );
+        $this->assertEquals(count($result), 1);
 
-        $this->assertEquals(count($result), 0);
-
-        $this->company->setName(Registry::get('UNKNOWN'));
-        $result = $this->company->getStrategy()->getMediasPathByCategory(
-            $this->company,
-            $this->category
-        );
-        $this->assertEquals(count($result), 0);
+        // $this->company->setName('Plop');
+        // $result = $this->company->getStrategy()->getMediasPathByCategory(
+        //     $this->company,
+        //     $this->category
+        // );
+        // $this->assertEquals(count($result), 0);        
     }
 
     public function testGetMediasByCategory()
@@ -110,11 +111,15 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
         $path = $this->company->getStorage()->getPath();
 
         rename($this->media->getPath(), $data_path);
+
         rmdir(dirname($this->media->getPath()));
-        $path = $path . Registry::get('COMPANY_NAME');
-        rmdir($path . '/' . Registry::get('NETWORK_NAME'));
         $path = $this->company->getStorage()->getPath();
-        rmdir($path . Registry::get('COMPANY_NAME'));
+        $path .= Registry::get('SIM_RESSOURCE_NAME') . '/';
+        $path .= 0;
+        rmdir($path);
+        $path = $this->company->getStorage()->getPath();
+        $path .= Registry::get('SIM_RESSOURCE_NAME');
+        rmdir($path);
         rmdir($this->company->getStorage()->getPath());
     }
 }

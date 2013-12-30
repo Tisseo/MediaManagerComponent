@@ -70,6 +70,7 @@ class NavitiaStrategy extends AbstractStrategy
 
         foreach ($files as $file) {
             $mediaPath = $path . '/' . $file;
+            $mediaId = pathinfo($mediaId, PATHINFO_FILENAME);
 
             if (is_dir($mediaPath)) {
                 continue ;
