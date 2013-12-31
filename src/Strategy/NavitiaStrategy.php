@@ -34,7 +34,7 @@ class NavitiaStrategy extends AbstractStrategy
         $path .= $category->getRessourceId();
 
         if (!file_exists($path)) {
-            return ;
+            return;
         }
 
         $files = array_diff(scandir($path), array('..', '.'));
@@ -63,7 +63,7 @@ class NavitiaStrategy extends AbstractStrategy
         $path .= $category->getRessourceId();
 
         if (!file_exists($path)) {
-            return ;
+            return;
         }
 
         $files = array_diff(scandir($path), array('..', '.'));
@@ -73,7 +73,7 @@ class NavitiaStrategy extends AbstractStrategy
             $mediaId = pathinfo($mediaId, PATHINFO_FILENAME);
 
             if (is_dir($mediaPath)) {
-                continue ;
+                continue;
             }
             if (pathinfo($file, PATHINFO_FILENAME) == $mediaId) {
                 return ($mediaPath);

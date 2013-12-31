@@ -34,7 +34,7 @@ class DefaultStrategy extends AbstractStrategy
     private function findCategory($path, $name)
     {
         if (!file_exists($path)) {
-            return ;
+            return;
         }
         $results = array_diff(scandir($path), array('.', '..'));
 
@@ -45,7 +45,7 @@ class DefaultStrategy extends AbstractStrategy
 
             if ($is_dir && $result == $name) {
                 $this->pathFound = $current_path;
-                break ;
+                break;
             } elseif ($is_dir) {
                 $this->findCategory($current_path, $name);
             }
