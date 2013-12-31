@@ -5,7 +5,6 @@ namespace CanalTP\MediaManager\Test\Storage;
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
-use CanalTP\MediaManager\Media\Factory\MediaFactory;
 use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Category\LineCategory;
 use CanalTP\MediaManager\Media\Builder\MediaBuilder;

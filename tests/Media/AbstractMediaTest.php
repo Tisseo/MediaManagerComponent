@@ -4,11 +4,9 @@ namespace CanalTP\MediaManager\Test\Media;
 
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
-use CanalTP\MediaManager\Category\AbstractCategory;
 use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Media\MediaType;
 use CanalTP\MediaManager\Media\SoundMediaType;
-use CanalTP\MediaManager\Media\SoundMedia;
 use CanalTP\MediaManager\Category\LineCategory;
 
 class AbstractMediaTest extends \PHPUnit_Framework_TestCase

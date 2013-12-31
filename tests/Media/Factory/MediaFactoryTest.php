@@ -3,7 +3,6 @@
 namespace CanalTP\MediaManager\Test\Media\Factory;
 
 use CanalTP\MediaManager\Registry;
-use CanalTP\MediaManager\Media\MediaType;
 use CanalTP\MediaManager\Media\Factory\MediaFactory;
 
 class MediaFactoryTest extends \PHPUnit_Framework_TestCase

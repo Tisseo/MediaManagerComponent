@@ -6,7 +6,6 @@ require __DIR__.'/../vendor/autoload.php';
 use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Category\CategoryType;
-use CanalTP\MediaManager\Category\CategoryInterface;
 use CanalTP\MediaManager\Category\Factory\CategoryFactory;
 
 $path = '/tmp/MediaManager/my_company/My_LineCategory/jingle_SNCF.mp3';

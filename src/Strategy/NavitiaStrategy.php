@@ -79,6 +79,7 @@ class NavitiaStrategy extends AbstractStrategy
                 return ($mediaPath);
             }
         }
+
         return (null);
     }
 }

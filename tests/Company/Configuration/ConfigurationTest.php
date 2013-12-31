@@ -6,8 +6,6 @@ use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
 use CanalTP\MediaManager\Storage\FileSystem;
 use CanalTP\MediaManager\Strategy\DefaultStrategy;
-use CanalTP\MediaManager\Storage\StorageInterface;
-use CanalTP\MediaManager\Strategy\StrategyInterface;
 
 class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
