@@ -34,7 +34,7 @@ class NavitiaStrategy extends AbstractStrategy
         $path .= $category->getRessourceId();
 
         if (!file_exists($path)) {
-            return;
+            return (array());
         }
 
         $files = array_diff(scandir($path), array('..', '.'));

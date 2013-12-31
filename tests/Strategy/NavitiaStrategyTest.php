@@ -80,6 +80,24 @@ class NavitiaStrategyTest extends \PHPUnit_Framework_TestCase
             Registry::get('SOUND_FILENAME')
         );
         $this->assertEquals(count($result), 1);
+
+        $tmpPath = $this->company->getStorage()->getPath();
+        $result = $this->company->getStrategy()->findMedia(
+            $this->company,
+            $this->category,
+            Registry::get('UNKNOWN')
+        );
+        $this->assertEquals(count($result), 0);
+
+        $this->company->getStorage()->setPath(Registry::get('UNKNOWN'));
+        $result = $this->company->getStrategy()->findMedia(
+            $this->company,
+            $this->category,
+            Registry::get('UNKNOWN')
+        );
+        $this->assertEquals(count($result), 0);
+
+        $this->company->getStorage()->setPath($tmpPath);
     }
 
     public function testGetMediasByCategory()
@@ -96,6 +114,14 @@ class NavitiaStrategyTest extends \PHPUnit_Framework_TestCase
             );
         }
         $this->assertEquals(1, $this->category->getMediaNumber());
+
+        $tmpPath = $this->company->getStorage()->getPath();
+        $this->company->getStorage()->setPath(Registry::get('UNKNOWN'));
+        $medias = $this->company->getMediasByCategory(
+            $this->category
+        );
+        // $this->assertEquals(0, $this->category->getMediaNumber());
+        $this->company->getStorage()->setPath($tmpPath);
     }
 
     public function tearDown()
