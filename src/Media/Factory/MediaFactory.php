@@ -17,7 +17,6 @@ class MediaFactory implements MediaFactoryInterface
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $this->mime = finfo_file($finfo, $fileName);
         finfo_close($finfo);
-        var_dump($this->mime);
     }
 
     private function determine()
