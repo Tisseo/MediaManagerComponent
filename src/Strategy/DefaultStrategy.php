@@ -85,7 +85,7 @@ class DefaultStrategy extends AbstractStrategy
     {
         $this->findCategory(
             $company->getStorage()->getPath() . $company->getName(),
-            $category->getId()
+            $category->getName()
         );
         $files = array_diff(scandir($this->pathFound), array('..', '.'));
 
@@ -93,7 +93,7 @@ class DefaultStrategy extends AbstractStrategy
             $mediaPath = $this->pathFound . '/' . $file;
             $fileName = pathinfo($mediaId, PATHINFO_BASENAME);
 
-            if (!is_dir($mediaPath) && $fileName == $file) {
+            if (!is_dir($mediaPath) && $mediaId == $fileName) {
                 return ($mediaPath);
             }
         }

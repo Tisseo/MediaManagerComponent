@@ -7,6 +7,7 @@ use CanalTP\MediaManager\Category\CategoryType;
 use CanalTP\MediaManager\Category\LogoCategory;
 use CanalTP\MediaManager\Category\NetworkCategory;
 use CanalTP\MediaManager\Category\LineCategory;
+use CanalTP\MediaManager\Category\StopPointCategory;
 use CanalTP\MediaManager\Category\ModeCategory;
 
 class CategoryFactory implements CategoryFactoryInterface
@@ -24,6 +25,9 @@ class CategoryFactory implements CategoryFactoryInterface
                 break;
             case CategoryType::LINE:
                 $category = new LineCategory();
+                break;
+            case CategoryType::STOP_POINT:
+                $category = new StopPointCategory();
                 break;
             case CategoryType::MODE:
                 $category = new ModeCategory();
