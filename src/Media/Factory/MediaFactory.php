@@ -5,6 +5,7 @@ namespace CanalTP\MediaManager\Media\Factory;
 use CanalTP\MediaManager\Media\MediaType;
 use CanalTP\MediaManager\Media\SoundMedia;
 use CanalTP\MediaManager\Media\PictureMedia;
+use CanalTP\MediaManager\Media\PdfMedia;
 use CanalTP\MediaManager\Media\Factory\MediaFactoryInterface;
 
 class MediaFactory implements MediaFactoryInterface
@@ -33,6 +34,9 @@ class MediaFactory implements MediaFactoryInterface
             case 'audio/mpeg':
                 $this->type = MediaType::SOUND;
                 break;
+            case 'application/pdf':
+                $this->type = MediaType::PDF;
+                break;
         }
     }
 
@@ -46,6 +50,9 @@ class MediaFactory implements MediaFactoryInterface
                 break;
             case MediaType::PICTURE:
                 $media = new PictureMedia();
+                break;
+            case MediaType::PDF:
+                $media = new PdfMedia();
                 break;
         }
 
