@@ -1,0 +1,77 @@
+<?php
+
+namespace CanalTP\MediaManager\Strategy;
+
+use CanalTP\MediaManager\Company\CompanyInterface;
+use CanalTP\MediaManager\Category\CategoryInterface;
+use CanalTP\MediaManager\Strategy\AbstractStrategy;
+
+class MttStrategy extends AbstractStrategy
+{
+    public function generatePath($media)
+    {
+        $path = $media->getCategory()->getName() . '/';
+        $path .= $media->getCategory()->getRessourceId() . '/';
+        $path .= $media->getBaseName();
+
+        return ($path);
+    }
+
+    public function getMediasPathByCategory(
+        CompanyInterface $company,
+        CategoryInterface $category
+    )
+    {
+        $path = $company->getStorage()->getPath();
+        $path .= $category->getName() . '/';
+        $path .= $category->getRessourceId();
+
+        if (!file_exists($path)) {
+            return (array());
+        }
+
+        $files = array_diff(scandir($path), array('..', '.'));
+        $medias = array();
+
+        foreach ($files as $file) {
+            $mediaPath = $path . '/' . $file;
+
+            if (!is_dir($mediaPath)) {
+                array_push($medias, $mediaPath);
+            }
+        }
+
+        return ($medias);
+    }
+
+    public function findMedia(
+        CompanyInterface $company,
+        CategoryInterface $category,
+        $mediaId
+    )
+    {
+        $path = $company->getStorage()->getPath();
+        $path .= $category->getName() . '/';
+        $path .= $category->getRessourceId();
+
+        if (!file_exists($path)) {
+            return;
+        }
+
+        $files = array_diff(scandir($path), array('..', '.'));
+
+        foreach ($files as $file) {
+            $mediaPath = $path . '/' . $file;
+            $mediaId = pathinfo($mediaId, PATHINFO_FILENAME);
+
+            if (is_dir($mediaPath)) {
+                continue;
+            }
+            if (pathinfo($file, PATHINFO_FILENAME) == $mediaId) {
+                return ($mediaPath);
+            }
+        }
+
+        return (null);
+    }
+}

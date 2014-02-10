@@ -5,6 +5,7 @@ namespace CanalTP\MediaManager\Company\Configuration\Builder;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilderInterface;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
 use CanalTP\MediaManager\Strategy\DefaultStrategy;
+use CanalTP\MediaManager\Strategy\MttStrategy;
 use CanalTP\MediaManager\Strategy\NavitiaStrategy;
 use CanalTP\MediaManager\Storage\FileSystem;
 
@@ -39,6 +40,9 @@ class ConfigurationBuilder implements ConfigurationBuilderInterface
         switch ($company['strategy']) {
             case 'default':
                 $this->configuration->setStrategy(new DefaultStrategy());
+                break;
+            case 'mtt':
+                $this->configuration->setStrategy(new MttStrategy());
                 break;
             case 'navitia':
                 $this->configuration->setStrategy(new NavitiaStrategy());
