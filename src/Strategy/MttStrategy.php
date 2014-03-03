@@ -8,12 +8,23 @@ use CanalTP\MediaManager\Strategy\AbstractStrategy;
 
 class MttStrategy extends AbstractStrategy
 {
+    private function buildPath($path, $category)
+    {
+        if ($category->getParent()) {
+            $path .= $this->buildPath($path, $category->getParent());
+        }
+        $path .= $category->getId() . '/';
+
+        return ($path);
+    }
+
     public function generatePath($media)
     {
-        $path = $media->getCategory()->getName() . '/';
-        $path .= $media->getCategory()->getRessourceId() . '/';
-        $path .= $media->getBaseName();
+        $category = $media->getCategory();
+        $path = $media->getCompany()->getName() . '/';
 
+        $path .= $this->buildPath("", $category);
+        $path .= $media->getBaseName();
         return ($path);
     }
 
@@ -51,8 +62,8 @@ class MttStrategy extends AbstractStrategy
     )
     {
         $path = $company->getStorage()->getPath();
-        $path .= $category->getName() . '/';
-        $path .= $category->getRessourceId();
+        $path .= $company->getName() . '/';
+        $path .= $this->buildPath("", $category);
 
         if (!file_exists($path)) {
             return;
@@ -61,7 +72,7 @@ class MttStrategy extends AbstractStrategy
         $files = array_diff(scandir($path), array('..', '.'));
 
         foreach ($files as $file) {
-            $mediaPath = $path . '/' . $file;
+            $mediaPath = $path . $file;
             $mediaId = pathinfo($mediaId, PATHINFO_FILENAME);
 
             if (is_dir($mediaPath)) {
@@ -71,7 +82,6 @@ class MttStrategy extends AbstractStrategy
                 return ($mediaPath);
             }
         }
-
         return (null);
     }
 }
