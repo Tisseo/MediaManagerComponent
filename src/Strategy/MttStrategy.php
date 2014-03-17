@@ -11,9 +11,9 @@ class MttStrategy extends AbstractStrategy
     private function buildPath($path, $category)
     {
         if ($category->getParent()) {
-            $path .= $this->buildPath($path, $category->getParent());
+            $path = $this->buildPath($path, $category->getParent()) . $path;
         }
-        $path .= $category->getId() . '/';
+        $path = $category->getId() . '/' . $path;
 
         return ($path);
     }
