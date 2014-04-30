@@ -13,7 +13,7 @@ class MttStrategy extends AbstractStrategy
         if ($category->getParent()) {
             $path = $this->buildPath($path, $category->getParent()) . $path;
         }
-        $path = $category->getId() . '/' . $path;
+        $path = $category->getRessourceId() . '/' . $category->getId() . '/' . $path;
 
         return ($path);
     }

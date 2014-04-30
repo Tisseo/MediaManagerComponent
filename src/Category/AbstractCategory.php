@@ -42,6 +42,11 @@ abstract class AbstractCategory implements CategoryInterface
         return ($this->ressourceId);
     }
 
+    public function setRessourceId($ressourceId)
+    {
+        $this->ressourceId = $ressourceId;
+    }
+
     public function setName($name)
     {
         $this->name = $name;
