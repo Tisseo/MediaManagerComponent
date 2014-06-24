@@ -22,9 +22,15 @@ class FileSystem extends AbstractStorage
         if (!is_dir(dirname($path))) {
             mkdir(dirname($path), 0777, true);
         }
-        if ($result = rename($media->getPath(), $path)) {
-            $media->setPath($path);
-        }
+
+        // TODO: Remove this when rename function will be patched --> https://bugs.php.net/bug.php?id=54097
+        $cmd = 'mv ' . $media->getPath() . ' ' . $path;
+        exec($cmd);
+        $media->setPath($path);
+        $result = true;
+        // if ($result = rename($media->getPath(), $path)) {
+        //     $media->setPath($path);
+        // }
 
         return ($result);
     }
