@@ -11,6 +11,14 @@ use CanalTP\MediaManager\Media\Builder\MediaBuilder;
 
 class FileSystem extends AbstractStorage
 {
+    private function move($src, $dest)
+    {
+        $result = copy($src, $dest);
+
+        unlink($src);
+        return ($result);
+    }
+
     public function addMedia(
         MediaInterface $media,
         StrategyInterface $strategy
@@ -23,11 +31,10 @@ class FileSystem extends AbstractStorage
             mkdir(dirname($path), 0777, true);
         }
 
-        // TODO: Remove this when rename function will be patched --> https://bugs.php.net/bug.php?id=54097
-        $cmd = 'mv ' . $media->getPath() . ' ' . $path;
-        exec($cmd);
+        // TODO: Remove this function when rename function will be patched
+        // -----> https://bugs.php.net/bug.php?id=54097
+        $result = $this->move($media->getPath(), $path);
         $media->setPath($path);
-        $result = true;
         // if ($result = rename($media->getPath(), $path)) {
         //     $media->setPath($path);
         // }

@@ -37,6 +37,8 @@ class MediaFactory implements MediaFactoryInterface
             case 'application/pdf':
                 $this->type = MediaType::PDF;
                 break;
+            default:
+                throw new \Exception('MediaManager can be save this type: ' . $this->mime);
         }
     }
 
