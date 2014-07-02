@@ -17,18 +17,18 @@ class MediaBuilder implements MediaBuilderInterface
     }
 
     public function buildMedia(
-        $file,
+        $path,
         CompanyInterface $company,
         CategoryInterface $category
         )
     {
         $mediaFactory = new MediaFactory();
-        $this->media = $mediaFactory->create($file);
+        $this->media = $mediaFactory->create($path);
 
-        $this->media->setFileName(pathinfo($file, PATHINFO_FILENAME));
-        $this->media->setBaseName(pathinfo($file, PATHINFO_BASENAME));
-        $this->media->setSize(filesize($file));
-        $this->media->setPath($file);
+        $this->media->setFileName(pathinfo($path, PATHINFO_FILENAME));
+        $this->media->setBaseName(pathinfo($path, PATHINFO_BASENAME));
+        $this->media->setSize(filesize($path));
+        $this->media->setPath($path);
         $this->media->setCompany($company);
         $this->media->setCategory($category);
 

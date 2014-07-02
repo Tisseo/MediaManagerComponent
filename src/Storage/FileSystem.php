@@ -91,14 +91,12 @@ class FileSystem extends AbstractStorage
         CategoryInterface $category,
         $basename
         ) {
-        $files = $strategy->getMediasPathByCategory($company, $category);
+        $result = false;
+        $path = $strategy->findMedia($company, $category, $basename);
 
-        foreach ($files as $file) {
-            if (basename($file) == $basename) {
-                return (unlink($file));
-            }
+        if (file_exists($path)) {
+            $result = unlink($path);
         }
-
-        return (false);
+        return ($result);
     }
 }
