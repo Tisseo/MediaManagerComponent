@@ -21,4 +21,5 @@ interface CompanyInterface
     public function getMediasByCategory(CategoryInterface $category);
     public function findMedia(CategoryInterface $category, $mediaId);
     public function removeMedia(CategoryInterface $category, $basename, $force);
+    public function removeCategory(CategoryInterface $category, $force);
 }

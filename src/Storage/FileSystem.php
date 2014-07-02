@@ -27,7 +27,7 @@ class FileSystem extends AbstractStorage
         $basename
     ) {
         $destDir = $this->getTrashDir();
-        $destDir .= $strategy->getRelativeCategoryPath(
+        $destDir .= $strategy->generateRelativeCategoryPath(
             $company,
             $category
         );
@@ -128,11 +128,9 @@ class FileSystem extends AbstractStorage
         $force
         ) {
         $result = false;
-        $path = $strategy->findMedia($company, $category, $basename);
+        $path = $strategy->generateCategoryPath($company, $category);
 
-        if (is_dir($path)) {
-            $result = rmdir($path);
-        }
+        // TODO: Remove folder with $path pattern.
         return ($result);
     }
 }

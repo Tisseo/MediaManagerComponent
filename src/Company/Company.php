@@ -99,4 +99,16 @@ class Company implements CompanyInterface
             )
         );
     }
+
+    public function removeCategory(CategoryInterface $category, $force)
+    {
+        return (
+            $this->getStorage()->removeCategory(
+                $this,
+                $this->getStrategy(),
+                $category,
+                $force
+            )
+        );
+    }
 }
