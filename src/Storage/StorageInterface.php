@@ -31,6 +31,19 @@ interface StorageInterface
         CompanyInterface $company,
         StrategyInterface $strategy,
         CategoryInterface $category,
-        $basename
+        $basename,
+        $force
     );
+
+    public function removeCategory(
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $force
+    );
+
+    public function getTrashDir();
+
+    public function getPath();
+    public function setPath($path);
 }

@@ -19,6 +19,26 @@ class FileSystem extends AbstractStorage
         return ($result);
     }
 
+    private function remove(
+        $path,
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $basename
+    ) {
+        $destDir = $this->getTrashDir();
+        $destDir .= $strategy->getRelativeCategoryPath(
+            $company,
+            $category
+        );
+
+        if (!file_exists($destDir))
+        {
+            mkdir($destDir, 0777, true);
+        }
+        return ($this->move($path, $destDir . $basename));
+    }
+
     public function addMedia(
         MediaInterface $media,
         StrategyInterface $strategy
@@ -89,13 +109,29 @@ class FileSystem extends AbstractStorage
         CompanyInterface $company,
         StrategyInterface $strategy,
         CategoryInterface $category,
-        $basename
+        $basename,
+        $force
         ) {
         $result = false;
         $path = $strategy->findMedia($company, $category, $basename);
 
         if (file_exists($path)) {
-            $result = unlink($path);
+            $result = (($force) ? unlink($path) : $this->remove($path, $company, $strategy, $category, $basename));
+        }
+        return ($result);
+    }
+
+    public function removeCategory(
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $force
+        ) {
+        $result = false;
+        $path = $strategy->findMedia($company, $category, $basename);
+
+        if (is_dir($path)) {
+            $result = rmdir($path);
         }
         return ($result);
     }

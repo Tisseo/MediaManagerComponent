@@ -133,7 +133,8 @@ abstract class AbstractMedia implements MediaInterface
     {
         $this->company->removeMedia(
             $this->getCategory(),
-            $this->getBaseName()
+            $this->getBaseName(),
+            $force
         );
     }
 }
