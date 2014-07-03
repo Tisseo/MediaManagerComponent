@@ -24,13 +24,14 @@ class FileSystem extends AbstractStorage
         CompanyInterface $company,
         StrategyInterface $strategy,
         CategoryInterface $category,
-        $basename
+        $basename = false
     ) {
         $destDir = $this->getTrashDir();
         $destDir .= $strategy->generateRelativeCategoryPath(
             $company,
             $category
         );
+        $basename = ($basename) ? $basename : basename($path);
 
         if (!file_exists($destDir))
         {
@@ -130,7 +131,10 @@ class FileSystem extends AbstractStorage
         $result = false;
         $path = $strategy->generateCategoryPath($company, $category);
 
-        // TODO: Remove folder with $path pattern.
+        foreach (glob($path . '*') as $mediaPath) {
+            debug($mediaPath);
+            $result = (($force) ? unlink($mediaPath) : $this->remove($mediaPath, $company, $strategy, $category));
+        }
         return ($result);
     }
 }
