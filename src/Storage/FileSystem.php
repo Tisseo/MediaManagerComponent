@@ -132,7 +132,6 @@ class FileSystem extends AbstractStorage
         $path = $strategy->generateCategoryPath($company, $category);
 
         foreach (glob($path . '*') as $mediaPath) {
-            debug($mediaPath);
             $result = (($force) ? unlink($mediaPath) : $this->remove($mediaPath, $company, $strategy, $category));
         }
         return ($result);
