@@ -19,6 +19,27 @@ class FileSystem extends AbstractStorage
         return ($result);
     }
 
+    private function remove(
+        $path,
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $basename = false
+    ) {
+        $destDir = $this->getTrashDir();
+        $destDir .= $strategy->generateRelativeCategoryPath(
+            $company,
+            $category
+        );
+        $basename = ($basename) ? $basename : basename($path);
+
+        if (!file_exists($destDir))
+        {
+            mkdir($destDir, 0777, true);
+        }
+        return ($this->move($path, $destDir . $basename));
+    }
+
     public function addMedia(
         MediaInterface $media,
         StrategyInterface $strategy
@@ -89,16 +110,31 @@ class FileSystem extends AbstractStorage
         CompanyInterface $company,
         StrategyInterface $strategy,
         CategoryInterface $category,
-        $basename
+        $basename,
+        $force
         ) {
-        $files = $strategy->getMediasPathByCategory($company, $category);
+        $result = false;
+        $path = $strategy->findMedia($company, $category, $basename);
 
-        foreach ($files as $file) {
-            if (basename($file) == $basename) {
-                return (unlink($file));
-            }
+        if (file_exists($path)) {
+            $result = (($force) ? unlink($path) : $this->remove($path, $company, $strategy, $category, $basename));
         }
+        return ($result);
+    }
 
-        return (false);
+    public function removeCategory(
+        CompanyInterface $company,
+        StrategyInterface $strategy,
+        CategoryInterface $category,
+        $force
+        ) {
+        $result = false;
+        $path = $strategy->generateCategoryPath($company, $category);
+
+        foreach (glob($path . '*') as $mediaPath) {
+            debug($mediaPath);
+            $result = (($force) ? unlink($mediaPath) : $this->remove($mediaPath, $company, $strategy, $category));
+        }
+        return ($result);
     }
 }

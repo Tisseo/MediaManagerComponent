@@ -4,6 +4,7 @@ namespace CanalTP\MediaManager\Category;
 
 use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Category\CategoryInterface;
+use CanalTP\MediaManager\Company\CompanyInterface;
 
 abstract class AbstractCategory implements CategoryInterface
 {
@@ -75,5 +76,13 @@ abstract class AbstractCategory implements CategoryInterface
     public function getMediaNumber()
     {
         return (count($this->medias));
+    }
+
+    public function delete(CompanyInterface $company, $force = false)
+    {
+        $company->removeCategory(
+            $this,
+            $force
+        );
     }
 }

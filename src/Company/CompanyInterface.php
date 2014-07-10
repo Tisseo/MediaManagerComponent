@@ -20,5 +20,6 @@ interface CompanyInterface
     public function addMedia(MediaInterface $media);
     public function getMediasByCategory(CategoryInterface $category);
     public function findMedia(CategoryInterface $category, $mediaId);
-    public function removeMedia(CategoryInterface $category, $basename);
+    public function removeMedia(CategoryInterface $category, $basename, $force);
+    public function removeCategory(CategoryInterface $category, $force);
 }

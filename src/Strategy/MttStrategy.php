@@ -28,6 +28,29 @@ class MttStrategy extends AbstractStrategy
         return ($path);
     }
 
+    public function generateCategoryPath(
+        CompanyInterface $company,
+        CategoryInterface $category
+    )
+    {
+        $path = $company->getStorage()->getPath();
+        $path .= $company->getName() . '/';
+
+        $path .= $this->buildPath("", $category);
+        return ($path);
+    }
+
+    public function generateRelativeCategoryPath(
+        CompanyInterface $company,
+        CategoryInterface $category
+    )
+    {
+        $path = $company->getName() . '/';
+
+        $path .= $this->buildPath("", $category);
+        return ($path);
+    }
+
     public function getMediasPathByCategory(
         CompanyInterface $company,
         CategoryInterface $category

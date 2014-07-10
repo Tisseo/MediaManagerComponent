@@ -3,6 +3,7 @@
 namespace CanalTP\MediaManager\Category;
 
 use CanalTP\MediaManager\Media\MediaInterface;
+use CanalTP\MediaManager\Company\CompanyInterface;
 
 interface CategoryInterface
 {
@@ -20,4 +21,6 @@ interface CategoryInterface
 
     public function getParent();
     public function setParent(CategoryInterface $category);
+
+    public function delete(CompanyInterface $company, $force);
 }

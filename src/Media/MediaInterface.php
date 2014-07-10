@@ -33,4 +33,6 @@ interface MediaInterface
 
     public function getCompany();
     public function setCompany(CompanyInterface $company);
+
+    public function delete($force);
 }

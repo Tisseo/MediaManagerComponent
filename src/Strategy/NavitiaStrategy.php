@@ -23,6 +23,16 @@ class NavitiaStrategy extends AbstractStrategy
         return ($path);
     }
 
+    public function generateRelativeCategoryPath(
+        CompanyInterface $company,
+        CategoryInterface $category
+    )
+    {
+        $path = $company->getName() . '/';
+
+        return ($path);
+    }
+
     public function getMediasPathByCategory(
         CompanyInterface $company,
         CategoryInterface $category

@@ -6,6 +6,7 @@ use CanalTP\MediaManager\Storage\StorageInterface;
 
 abstract class AbstractStorage implements StorageInterface
 {
+    const TRASH_DIR = '.trash/';
     private $path = null;
 
     public function __construct()
@@ -21,5 +22,10 @@ abstract class AbstractStorage implements StorageInterface
     public function setPath($newPath)
     {
         $this->path = $newPath;
+    }
+
+    public function getTrashDir()
+    {
+        return ($this->getPath() . AbstractStorage::TRASH_DIR);
     }
 }

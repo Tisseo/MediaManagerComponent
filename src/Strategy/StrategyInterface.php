@@ -17,4 +17,8 @@ interface StrategyInterface
         CategoryInterface $category,
         $mediaId
     );
+    public function generateRelativeCategoryPath(
+        CompanyInterface $company,
+        CategoryInterface $category
+    );
 }

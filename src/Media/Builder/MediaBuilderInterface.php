@@ -8,7 +8,7 @@ use CanalTP\MediaManager\Company\CompanyInterface;
 interface MediaBuilderInterface
 {
     public function buildMedia(
-        $files,
+        $path,
         CompanyInterface $company,
         CategoryInterface $category
         );
