@@ -159,7 +159,7 @@ class AbstractMediaTest extends \PHPUnit_Framework_TestCase
                 'type' => 'filesystem',
                 'path' => '/tmp/MediaManager/',
             ),
-            'strategy' => 'default'
+            'strategy' => Registry::get('DEFAULT_STRATEGY_NAME')
         );
         $configBuilder = new ConfigurationBuilder();
         $company = new Company();

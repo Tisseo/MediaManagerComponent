@@ -2,6 +2,7 @@
 
 namespace CanalTP\MediaManager\Test\Storage;
 
+use CanalTP\MediaManager\Test\AbstractTest;
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
@@ -9,10 +10,9 @@ use CanalTP\MediaManager\Company\Company;
 use CanalTP\MediaManager\Category\LineCategory;
 use CanalTP\MediaManager\Media\Builder\MediaBuilder;
 
-class FileSystemTest extends \PHPUnit_Framework_TestCase
+class FileSystemTest extends AbstractTest
 {
     private $media = null;
-    private $company = null;
     private $filePath = null;
 
     public function setUp()
@@ -24,7 +24,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
                 'type' => 'filesystem',
                 'path' => '/tmp/MediaManager/',
             ),
-            'strategy' => 'default'
+            'strategy' => Registry::get('DEFAULT_STRATEGY_NAME')
         );
         $category = new LineCategory();
         $category->setName(Registry::get('CATEGORY_NAME'));
@@ -62,11 +62,7 @@ class FileSystemTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $path = $this->company->getStorage()->getPath();
-
         rename($this->media->getPath(), $this->filePath);
-        rmdir(dirname($this->media->getPath()));
-        rmdir($path . Registry::get('COMPANY_NAME'));
-        rmdir($path);
+        parent::tearDown();
     }
 }
