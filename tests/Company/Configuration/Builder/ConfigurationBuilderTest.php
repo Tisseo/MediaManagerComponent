@@ -18,7 +18,7 @@ class ConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
                 'type' => 'filesystem',
                 'path' => '/tmp/MediaManager/',
             ),
-            'strategy' => 'default'
+            'strategy' => Registry::get('DEFAULT_STRATEGY_NAME')
         );
         $this->builder = new ConfigurationBuilder();
     }
@@ -27,7 +27,7 @@ class ConfigurationBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $configuration = $this->builder->buildConfiguration($this->params);
 
-        $this->params['strategy'] = 'navitia';
+        $this->params['strategy'] = Registry::get('NAVITIA_STRATEGY_NAME');
         $configuration = $this->builder->buildConfiguration($this->params);
     }
 

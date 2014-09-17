@@ -2,6 +2,7 @@
 
 namespace CanalTP\MediaManager\Test\Strategy;
 
+use CanalTP\MediaManager\Test\AbstractTest;
 use CanalTP\MediaManager\Registry;
 use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
 use CanalTP\MediaManager\Company\Configuration\Configuration;
@@ -10,9 +11,8 @@ use CanalTP\MediaManager\Category\Factory\CategoryFactory;
 use CanalTP\MediaManager\Category\CategoryType;
 use CanalTP\MediaManager\Company\Company;
 
-class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
+class DefaultStrategyTest extends AbstractTest
 {
-    private $company = null;
     private $strategy = null;
     private $category = null;
     private $media = null;
@@ -58,7 +58,9 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
     public function testGeneratePath()
     {
         $path = Registry::get('COMPANY_NAME') . '/';
+        $path .= 'networks/';
         $path .= Registry::get('NETWORK_NAME') . '/';
+        $path .= Registry::get('CATEGORY_NAME') . '/';
         $path .= Registry::get('CATEGORY_NAME') . '/';
         $path .= 'jingle_SNCF.mp3';
         $result = $this->company->getStrategy()->generatePath($this->media);
@@ -106,15 +108,9 @@ class DefaultStrategyTest extends \PHPUnit_Framework_TestCase
 
     public function tearDown()
     {
-        $data_path = Registry::get('/') . Registry::get('SOUND_FILE');
-        $path = $this->company->getStorage()->getPath();
+        $dataPath = Registry::get('/') . Registry::get('SOUND_FILE');
 
-        rename($this->media->getPath(), $data_path);
-        rmdir(dirname($this->media->getPath()));
-        $path = $path . Registry::get('COMPANY_NAME');
-        rmdir($path . '/' . Registry::get('NETWORK_NAME'));
-        $path = $this->company->getStorage()->getPath();
-        rmdir($path . Registry::get('COMPANY_NAME'));
-        rmdir($this->company->getStorage()->getPath());
+        rename($this->media->getPath(), $dataPath);
+        parent::tearDown();
     }
 }
