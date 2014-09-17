@@ -8,14 +8,12 @@ use CanalTP\MediaManager\Strategy\AbstractStrategy;
 
 class DefaultStrategy extends AbstractStrategy
 {
-    private $pathFound = "";
-
     private function buildPath($path, $category)
     {
         if ($category->getParent()) {
             $path .= $this->buildPath($path, $category->getParent());
         }
-        $path .= $category->getId() . '/';
+        $path .= $category->getRessourceId() . '/' . $category->getId() . '/';
 
         return ($path);
     }
@@ -27,29 +25,30 @@ class DefaultStrategy extends AbstractStrategy
 
         $path .= $this->buildPath("", $category);
         $path .= $media->getBaseName();
-
         return ($path);
     }
 
-    private function findCategory($path, $name)
+    public function generateCategoryPath(
+        CompanyInterface $company,
+        CategoryInterface $category
+    )
     {
-        if (!file_exists($path)) {
-            return;
-        }
-        $results = array_diff(scandir($path), array('.', '..'));
+        $path = $company->getStorage()->getPath();
+        $path .= $company->getName() . '/';
 
-        foreach ($results as $result) {
+        $path .= $this->buildPath("", $category);
+        return ($path);
+    }
 
-            $current_path = $path . '/' . $result;
-            $is_dir = is_dir($current_path);
+    public function generateRelativeCategoryPath(
+        CompanyInterface $company,
+        CategoryInterface $category
+    )
+    {
+        $path = $company->getName() . '/';
 
-            if ($is_dir && $result == $name) {
-                $this->pathFound = $current_path;
-                break;
-            } elseif ($is_dir) {
-                $this->findCategory($current_path, $name);
-            }
-        }
+        $path .= $this->buildPath("", $category);
+        return ($path);
     }
 
     public function getMediasPathByCategory(
@@ -57,22 +56,24 @@ class DefaultStrategy extends AbstractStrategy
         CategoryInterface $category
     )
     {
+        $path = $company->getStorage()->getPath();
+        $path .= $category->getName() . '/';
+        $path .= $category->getRessourceId();
+
+        if (!file_exists($path)) {
+            return (array());
+        }
+
+        $files = array_diff(scandir($path), array('..', '.'));
         $medias = array();
-        $path = $company->getStorage()->getPath() . $company->getName();
 
-        $this->findCategory($path, $category->getName());
+        foreach ($files as $file) {
+            $mediaPath = $path . '/' . $file;
 
-        if ($this->pathFound != "") {
-            $files = array_diff(scandir($this->pathFound), array('..', '.'));
-            foreach ($files as $file) {
-                $mediaPath = $this->pathFound . '/' . $file;
-
-                if (!is_dir($mediaPath)) {
-                    array_push($medias, $mediaPath);
-                }
+            if (!is_dir($mediaPath)) {
+                array_push($medias, $mediaPath);
             }
         }
-        $this->pathFound = "";
 
         return ($medias);
     }
@@ -83,21 +84,27 @@ class DefaultStrategy extends AbstractStrategy
         $mediaId
     )
     {
-        $this->findCategory(
-            $company->getStorage()->getPath() . $company->getName(),
-            $category->getName()
-        );
-        $files = array_diff(scandir($this->pathFound), array('..', '.'));
+        $path = $company->getStorage()->getPath();
+        $path .= $company->getName() . '/';
+        $path .= $this->buildPath("", $category);
+
+        if (!file_exists($path)) {
+            return;
+        }
+
+        $files = array_diff(scandir($path), array('..', '.'));
 
         foreach ($files as $file) {
-            $mediaPath = $this->pathFound . '/' . $file;
-            $fileName = pathinfo($mediaId, PATHINFO_BASENAME);
+            $mediaPath = $path . $file;
+            $mediaId = pathinfo($mediaId, PATHINFO_FILENAME);
 
-            if (!is_dir($mediaPath) && $mediaId == $fileName) {
+            if (is_dir($mediaPath)) {
+                continue;
+            }
+            if (pathinfo($file, PATHINFO_FILENAME) == $mediaId) {
                 return ($mediaPath);
             }
         }
-
         return (null);
     }
 }

@@ -37,17 +37,7 @@ class ConfigurationBuilder implements ConfigurationBuilderInterface
 
     private function initStrategy($company)
     {
-        switch ($company['strategy']) {
-            case 'default':
-                $this->configuration->setStrategy(new DefaultStrategy());
-                break;
-            case 'mtt':
-                $this->configuration->setStrategy(new MttStrategy());
-                break;
-            case 'navitia':
-                $this->configuration->setStrategy(new NavitiaStrategy());
-                break;
-        }
+        $this->configuration->setStrategy(new $company['strategy']);
     }
 
     public function buildConfiguration($company)
