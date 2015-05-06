@@ -58,8 +58,8 @@ class MediaFactory implements MediaFactoryInterface
                 $media = new PdfMedia();
                 break;
             case MediaType::UNKNOWN:
-            	$media = new GenericMedia();
-            	break;
+                $media = new GenericMedia();
+                break;
         }
 
         return ($media);
