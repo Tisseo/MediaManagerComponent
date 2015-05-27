@@ -49,17 +49,18 @@ The strategy is use to define all informations about the manipulations
 
  For exemple if you want to use local stockage to put medias, you have to do
   this informations.
-
-    // Strategy
-    $params = array(
-        'company' => array(
-        'storage' => array(
-            'type' => 'filesystem',
-            'path' => '/tmp/my_storage/',
-        ),
-        'strategy' => 'default'
-        )
-    );
+```php
+// Strategy
+$params = array(
+    'company' => array(
+    'storage' => array(
+        'type' => 'filesystem',
+        'path' => '/tmp/my_storage/',
+    ),
+    'strategy' => 'default'
+    )
+);
+```
 
 #### Run exemple ####
 
@@ -69,46 +70,104 @@ You can run simple_listing.php (example/simple_listing.php) to list all media.
 
 
 #### Upload Example ####
+```Shell
+$> cd example
+$> ./simple_upload.php
+```
 
-    // Shell
-    $> cd example
-    $> ./simple_upload.php
+```php
+// example/simple_upload.php
+use CanalTP\MediaManager\Company\Company;
+use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
+use CanalTP\MediaManager\Media\Builder\MediaBuilder;
+use CanalTP\MediaManager\Category\CategoryType;
+use CanalTP\MediaManager\Category\Factory\CategoryFactory;
+
+$params = array(
+    'name' => 'my_company',
+    'storage' => array(
+        'type' => 'filesystem',
+        'path' => '/tmp/MediaManager/',
+    ),
+    'strategy' => 'default'
+);
+$company = new Company();
+$configurationBuilder = new ConfigurationBuilder();
+$mediaBuilder = new MediaBuilder();
+$categoryFactory = new CategoryFactory();
+
+$company->setConfiguration($configurationBuilder->buildConfiguration($params));
+$company->setName($params['name']);
+
+$category = $categoryFactory->create(CategoryType::LINE);
+$category->setName('My_LineCategory');
+
+$media = $mediaBuilder->buildMedia(
+    '../tests/data/CanalTP/sound/jingle_SNCF.mp3',
+    $company,
+    $category
+);
+
+$company->addMedia($media);
+
+echo "\n######### " . $media->getFileName() . " ############\n\n";
+echo "Path: " . $media->getPath() . "\n";
+echo "BaseName: " . $media->getBaseName() . "\n";
+echo "FileName: " . $media->getFileName() . "\n";
+echo "Size: " . $media->getSize() . "\n";
+echo "Type: " . $media->getType() . "\n";
+echo "Extension: " . $media->getExtension() . "\n";
+echo "MediaType: " . $media->getMediaType() . "\n";
+echo "Company: " . $media->getCompany()->getName() . "\n";
+echo "Category: " . $media->getCategory()->getName() . "\n";
+echo "\n############################################\n\n";
+
+exit (0);
+```
 
 
-    // example/simple_upload.php
-    use CanalTP\MediaManager\Company\Company;
-    use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
-    use CanalTP\MediaManager\Media\Builder\MediaBuilder;
-    use CanalTP\MediaManager\Category\CategoryType;
-    use CanalTP\MediaManager\Category\Factory\CategoryFactory;
+#### Listing Example ####
 
-    $params = array(
-        'name' => 'my_company',
-        'storage' => array(
-            'type' => 'filesystem',
-            'path' => '/tmp/MediaManager/',
-        ),
-        'strategy' => 'default'
-    );
-    $company = new Company();
-    $configurationBuilder = new ConfigurationBuilder();
-    $mediaBuilder = new MediaBuilder();
-    $categoryFactory = new CategoryFactory();
+```Shell
+$> cd example
+$> ./simple_listing.php
+```
 
-    $company->setConfiguration($configurationBuilder->buildConfiguration($params));
-    $company->setName($params['name']);
+```php
+// example/simple_listing.php
+use CanalTP\MediaManager\Company\Company;
+use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
+use CanalTP\MediaManager\Category\CategoryType;
+use CanalTP\MediaManager\Category\CategoryInterface;
+use CanalTP\MediaManager\Category\Factory\CategoryFactory;
+$path = '/tmp/MediaManager/my_company/My_LineCategory/jingle_SNCF.mp3';
 
-    $category = $categoryFactory->create(CategoryType::LINE);
-    $category->setName('My_LineCategory');
+if (!file_exists($path)) {
+    echo "Please run \"./simple_upload.php\" before.\n";
+    exit (0);
+}
 
-    $media = $mediaBuilder->buildMedia(
-        '../tests/data/CanalTP/sound/jingle_SNCF.mp3',
-        $company,
-        $category
-    );
+$params = array(
+    'name' => 'my_company',
+    'storage' => array(
+        'type' => 'filesystem',
+        'path' => '/tmp/MediaManager/',
+    ),
+    'strategy' => 'default'
+);
+$company = new Company();
+$configurationBuilder = new ConfigurationBuilder();
+$categoryFactory = new CategoryFactory();
 
-    $company->addMedia($media);
+$company->setConfiguration($configurationBuilder->buildConfiguration($params));
+$company->setName($params['name']);
 
+$category = $categoryFactory->create(CategoryType::LINE);
+$category->setName('My_LineCategory');
+
+$medias = $company->getMediasByCategory($category);
+
+foreach ($medias as $media) {
     echo "\n######### " . $media->getFileName() . " ############\n\n";
     echo "Path: " . $media->getPath() . "\n";
     echo "BaseName: " . $media->getBaseName() . "\n";
@@ -120,68 +179,10 @@ You can run simple_listing.php (example/simple_listing.php) to list all media.
     echo "Company: " . $media->getCompany()->getName() . "\n";
     echo "Category: " . $media->getCategory()->getName() . "\n";
     echo "\n############################################\n\n";
+}
 
-    exit (0);
-
-
-
-#### Listing Example ####
-
-    // Shell
-    $> cd example
-    $> ./simple_listing.php
-
-
-    // example/simple_listing.php
-    use CanalTP\MediaManager\Company\Company;
-    use CanalTP\MediaManager\Company\Configuration\Builder\ConfigurationBuilder;
-    use CanalTP\MediaManager\Category\CategoryType;
-    use CanalTP\MediaManager\Category\CategoryInterface;
-    use CanalTP\MediaManager\Category\Factory\CategoryFactory;
-
-    $path = '/tmp/MediaManager/my_company/My_LineCategory/jingle_SNCF.mp3';
-
-    if (!file_exists($path)) {
-        echo "Please run \"./simple_upload.php\" before.\n";
-        exit (0);
-    }
-
-    $params = array(
-        'name' => 'my_company',
-        'storage' => array(
-            'type' => 'filesystem',
-            'path' => '/tmp/MediaManager/',
-        ),
-        'strategy' => 'default'
-    );
-    $company = new Company();
-    $configurationBuilder = new ConfigurationBuilder();
-    $categoryFactory = new CategoryFactory();
-
-    $company->setConfiguration($configurationBuilder->buildConfiguration($params));
-    $company->setName($params['name']);
-
-    $category = $categoryFactory->create(CategoryType::LINE);
-    $category->setName('My_LineCategory');
-
-    $medias = $company->getMediasByCategory($category);
-
-    foreach ($medias as $media) {
-        echo "\n######### " . $media->getFileName() . " ############\n\n";
-        echo "Path: " . $media->getPath() . "\n";
-        echo "BaseName: " . $media->getBaseName() . "\n";
-        echo "FileName: " . $media->getFileName() . "\n";
-        echo "Size: " . $media->getSize() . "\n";
-        echo "Type: " . $media->getType() . "\n";
-        echo "Extension: " . $media->getExtension() . "\n";
-        echo "MediaType: " . $media->getMediaType() . "\n";
-        echo "Company: " . $media->getCompany()->getName() . "\n";
-        echo "Category: " . $media->getCategory()->getName() . "\n";
-        echo "\n############################################\n\n";
-    }
-
-    exit (0);
-
+exit (0);
+```
 
 
 Running MediaManager Tests
@@ -189,8 +190,9 @@ Running MediaManager Tests
 
 To run tests you need to have phpunit.
 
-    // Shell
-    $> phpunit
+```Shell
+$> phpunit
+```
 
 Contributing
 -------------
