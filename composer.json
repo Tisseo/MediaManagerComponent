@@ -3,7 +3,7 @@
     "type": "library",
     "description": "Media Manager Component",
     "keywords": [],
-    "license": "MIT",
+    "license": "AGPL-3.0",
     "authors": [
         {
             "name": "Rémy Abi-Khalil",
