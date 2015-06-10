@@ -59,9 +59,9 @@ class Company implements CompanyInterface
         $this->name = $newName;
     }
 
-    public function addMedia(MediaInterface $media)
+    public function addMedia(MediaInterface $media, $mode = self::MOVE)
     {
-        return ($this->getStorage()->addMedia($media, $this->getStrategy()));
+        return ($this->getStorage()->addMedia($media, $this->getStrategy(), $mode));
     }
 
     public function getMediasByCategory(CategoryInterface $category)

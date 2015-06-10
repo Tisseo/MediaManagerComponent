@@ -8,6 +8,8 @@ use CanalTP\MediaManager\Company\Configuration\ConfigurationInterface;
 
 interface CompanyInterface
 {
+    const MOVE = 0;
+    const COPY = 1;
     public function __construct();
     public function setConfiguration(ConfigurationInterface $config);
     public function getConfiguration();
@@ -17,7 +19,7 @@ interface CompanyInterface
     public function setId($id);
     public function getName();
     public function setName($name);
-    public function addMedia(MediaInterface $media);
+    public function addMedia(MediaInterface $media, $mode = self::MOVE);
     public function getMediasByCategory(CategoryInterface $category);
     public function findMedia(CategoryInterface $category, $mediaId);
     public function removeMedia(CategoryInterface $category, $basename, $force);
