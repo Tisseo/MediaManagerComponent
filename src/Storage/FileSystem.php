@@ -49,11 +49,11 @@ class FileSystem extends AbstractStorage
     /**
      * @param MediaInterface $media
      * @param StrategyInterface $strategy
-     * @param integer $mode Company::MOVE move or Company::COPY. Default Company::MOVE
+     * @param integer $mode StorageModeType::MOVE move or StorageModeType::COPY. Default StorageModeType::MOVE
      * @throws \Exception
      * @return bool
      */
-    public function addMedia(MediaInterface $media, StrategyInterface $strategy, $mode = Company::MOVE)
+    public function addMedia(MediaInterface $media, StrategyInterface $strategy, $mode = StorageModeType::MOVE)
     {
         $path = $this->getPath();
         $path .= $strategy->generatePath($media);
@@ -62,14 +62,15 @@ class FileSystem extends AbstractStorage
             mkdir(dirname($path), 0777, true);
         }
 
-        // TODO: Remove this function when rename function will be patched
         // -----> https://bugs.php.net/bug.php?id=54097
         switch($mode) {
-            case Company::MOVE:
+            case StorageModeType::MOVE:
+                // TODO: Remove this function when rename function will be patched
                 $result = $this->move($media->getPath(), $path);
                 break;
 
-            case Company::COPY:
+            case StorageModeType::COPY:
+                // TODO: Remove this function when rename function will be patched
                 $result = $this->copy($media->getPath(), $path);
                 break;
             default:

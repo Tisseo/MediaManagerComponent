@@ -6,6 +6,7 @@ use CanalTP\MediaManager\Company\CompanyInterface;
 use CanalTP\MediaManager\Category\CategoryInterface;
 use CanalTP\MediaManager\Media\MediaInterface;
 use CanalTP\MediaManager\Company\Configuration\ConfigurationInterface;
+use CanalTP\MediaManager\Storage\StorageModeType;
 
 class Company implements CompanyInterface
 {
@@ -59,7 +60,7 @@ class Company implements CompanyInterface
         $this->name = $newName;
     }
 
-    public function addMedia(MediaInterface $media, $mode = self::MOVE)
+    public function addMedia(MediaInterface $media, $mode = StorageModeType::MOVE)
     {
         return ($this->getStorage()->addMedia($media, $this->getStrategy(), $mode));
     }
