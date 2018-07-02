@@ -19,6 +19,20 @@ class MediaFactory implements MediaFactoryInterface
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
         $this->mime = finfo_file($finfo, $fileName);
         finfo_close($finfo);
+
+        // For an unknown reason, mimetype is not valid
+        // when detected by PHP (sometimes)
+        if ($this->mime == 'application/octet-stream') {
+            try {
+                $mime = shell_exec('mimetype -b '.$fileName);
+
+                if ($mime) {
+                    $this->mime = trim($mime);
+                }
+            } catch (\Exception $e) {
+                // pass
+            }
+        }
     }
 
     private function determine()
